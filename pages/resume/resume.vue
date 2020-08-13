@@ -24,8 +24,8 @@ export default {
 	},
 	data() {
 		return {
-			fill: '#FFFFFF',
-			linearGradient: 'linear-gradient(to top left, #b1b1b1, #f2f2f2)'
+			fill: '#333',
+			linearGradient: 'linear-gradient(to top left, #b1b1b1, #f2f2f2);'
 		};
 	}
 };
@@ -37,10 +37,10 @@ export default {
 	padding: 0;
 }
 .resume-bg {
-	color: #333;
+	color: #fff;
 	width: 100%;
 	/* min-height: 1200rpx; */
-	/* background: #333; */
+	/* background: #fff; */
 	/* background-image: linear-gradient(to top left, #b1b1b1, #f2f2f2); */
 }
 </style>

@@ -147,6 +147,7 @@ export default {
 	justify-content: center;
 	/* border: 1px solid red; */
 	min-height: 400rpx;
+	margin-top: 10rpx;
 }
 .brief-introduction .brief-img {
 	width: 200rpx;
@@ -235,6 +236,7 @@ export default {
 }
 .brief-content {
 	margin-top: 60rpx;
+	padding: 0 10rpx;
 }
 .example-introduction {
 	text-align: center;

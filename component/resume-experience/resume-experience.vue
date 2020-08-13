@@ -1,26 +1,21 @@
 <template>
 	<view class="resume-experience">
 		<view class="line"><wired-divider class="lineColor" :style="{ color: lineColor }"></wired-divider></view>
-		<swiper :indicator-dots="indicatorDots" :autoplay="false" class="swiper-layout">
-			<swiper-item class="swiper-item-container">
+		<swiper :indicator-dots="indicatorDots" :autoplay="false" class="swiper-layout" :indicator-active-color="indictor">
+			<swiper-item class="swiper-item-container" v-for="(item,index) in experienceArr" :key="index">
 				<view class="swiper-item">
 					<view class="corporate">
-						<view class="name">广州xxxx信息有限公司</view>
+						<view class="name">{{item.exName}}</view>
 						<wired-image
-							elevation="1"
-							src="https://www.gstatic.com/webp/gallery/1.sm.jpg"
+							:elevation="index >= 5?5:index"
+							:src="item.exSrc"
 							class="swiper-img"
 							:style="{ color: exImageColor, width: exWidth, height: xeHeight }"
 						></wired-image>
 					</view>
 					<view class="swiper-content">
-						<view>1.根据UI设计还原页面；</view>
-						<view>2.与后端交互数据；</view>
-						<view>3.负责公司的官网和微信公众号开发；</view>
-						<view>1.根据UI设计还原页面；</view>
-						<view>2.与后端交互数据；</view>
-						<view>3.负责公司的官网和微信公众号开发；</view>
-					</view>
+						<view v-for="(items,indexs) in item.exsContent" :key="indexs">{{indexs+1}}. {{items.text}}</view>
+					</view>	
 				</view>
 			</swiper-item>
 		</swiper>
@@ -36,7 +31,38 @@ export default {
 		experienceArr: {
 			type: Array,
 			default: () => {
-				return [];
+				return [
+					{
+						exName:'广州xxxx信息有限公司1',
+						exSrc:'https://www.gstatic.com/webp/gallery/1.sm.jpg',
+						exsContent:[
+							{
+								text:'根据UI设计还原页面；'
+							},
+							{
+								text:'与后端交互数据；'
+							},
+							{
+								text:'负责公司的官网和微信公众号开发；'
+							}
+						]
+					},
+					{
+						exName:'广州xxxx信息有限公司2',
+						exSrc:'https://www.gstatic.com/webp/gallery/2.sm.jpg',
+						exsContent:[
+							{
+								text:'根据UI设计还原页面；'
+							},
+							{
+								text:'与后端交互数据；'
+							},
+							{
+								text:'负责公司的官网和微信公众号开发；'
+							}
+						]
+					}
+				];
 			}
 		},
 		exImageColor: {
@@ -61,6 +87,12 @@ export default {
 			type: String,
 			default: () => {
 				return '#B1B1B1';
+			}
+		},	
+		indictor:{
+			type: String,
+			default: () => {
+				return '#FFFFFF';
 			}
 		}
 	},
