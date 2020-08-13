@@ -1,12 +1,12 @@
 <template>
 	<view class="resume-layout">
 		<!-- 背景 -->
-		<wired-card elevation="4" :fill="fill" class="resume-bg" :style="{ backgroundImage: linearGradient }">
+		<wired-card elevation="4" :fill="fill" class="resume-bg" :style="{ 'background-image': linearGradient }">
 			<!-- 简介 -->
 			<resume-header></resume-header>
+			<!-- 经验 -->
+			<resume-experience></resume-experience>
 		</wired-card>
-
-		<!-- 经验 -->
 		<!-- 作品/项目-->
 		<!-- 联系 -->
 		<!-- 尾部 -->
@@ -15,15 +15,17 @@
 
 <script>
 import resumeHeader from '../../component/resume-header/resume-header.vue';
+import resumeExperience from '../../component/resume-experience/resume-experience.vue';
 export default {
 	name: 'resume',
 	components: {
-		resumeHeader
+		resumeHeader,
+		resumeExperience
 	},
 	data() {
 		return {
 			fill: '#FFFFFF',
-			linearGradient: '(to top left, #b1b1b1, #f2f2f2)'
+			linearGradient: 'linear-gradient(to top left, #b1b1b1, #f2f2f2)'
 		};
 	}
 };
@@ -37,8 +39,8 @@ export default {
 .resume-bg {
 	color: #333;
 	width: 100%;
-	min-height: 1200rpx;
+	/* min-height: 1200rpx; */
 	/* background: #333; */
-	background-image: linear-gradient(to top left, #b1b1b1, #f2f2f2);
+	/* background-image: linear-gradient(to top left, #b1b1b1, #f2f2f2); */
 }
 </style>
