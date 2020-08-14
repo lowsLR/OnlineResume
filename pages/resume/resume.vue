@@ -39,7 +39,7 @@ export default {
 .resume-bg {
 	color: #fff;
 	width: 100%;
-	/* min-height: 1200rpx; */
+	min-height: 1800rpx;
 	/* background: #fff; */
 	/* background-image: linear-gradient(to top left, #b1b1b1, #f2f2f2); */
 }

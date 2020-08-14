@@ -179,6 +179,7 @@ page {
 	display: flex;
 	align-items: center;
 	/* border: 1px solid red; */
+	padding: 0 10rpx;
 }
 .swiper-img {
 	width: 240rpx;
