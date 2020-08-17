@@ -6,9 +6,9 @@
 			<resume-header></resume-header>
 			<!-- 经验 -->
 			<resume-experience></resume-experience>
+			<!-- 作品/项目-->
+			<resume-works></resume-works>
 		</wired-card>
-		<!-- 作品/项目-->
-		
 		<!-- 联系 -->
 		<!-- 尾部 -->
 	</view>
@@ -17,11 +17,13 @@
 <script>
 import resumeHeader from '../../component/resume-header/resume-header.vue';
 import resumeExperience from '../../component/resume-experience/resume-experience.vue';
+import resumeWorks from '../../component/resume-works/resume-works.vue';
 export default {
 	name: 'resume',
 	components: {
 		resumeHeader,
-		resumeExperience
+		resumeExperience,
+		resumeWorks
 	},
 	data() {
 		return {

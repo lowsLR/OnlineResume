@@ -131,12 +131,11 @@ export default {
 				let query = uni.createSelectorQuery().in(this);
 				query.select(element).boundingClientRect();
 				query.exec(res => {
-					console.log(res,"==>res");
+					// console.log(res,"==>res");
 					if (!res) {
 						//如果没获取到，再调一次
 						_self.getElementHeight();
 					} else {
-						// _self.swiperHeight = res[0].height+'px';
 					_self.swiperHeight = _self.array[changeIndex].exsContent.length*res[0].height+120+'px';
 						console.log(_self.swiperHeight);
 					}
