@@ -8,8 +8,9 @@
 			<resume-experience></resume-experience>
 			<!-- 作品/项目-->
 			<resume-works></resume-works>
+			<!-- 联系 -->
+			<resume-contact></resume-contact>
 		</wired-card>
-		<!-- 联系 -->
 		<!-- 尾部 -->
 	</view>
 </template>
@@ -18,12 +19,14 @@
 import resumeHeader from '../../component/resume-header/resume-header.vue';
 import resumeExperience from '../../component/resume-experience/resume-experience.vue';
 import resumeWorks from '../../component/resume-works/resume-works.vue';
+import resumeContact from '../../component/resume-contact/resume-contact.vue';
 export default {
 	name: 'resume',
 	components: {
 		resumeHeader,
 		resumeExperience,
-		resumeWorks
+		resumeWorks,
+		resumeContact
 	},
 	data() {
 		return {
@@ -47,3 +50,4 @@ export default {
 	/* background-image: linear-gradient(to top left, #b1b1b1, #f2f2f2); */
 }
 </style>
+  

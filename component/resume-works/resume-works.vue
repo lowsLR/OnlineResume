@@ -142,6 +142,7 @@ export default {
 }
 .content-list {
 	margin-top: 20rpx;
+	font-size: 32rpx;
 }
 .content-list .conten {
 	margin: 10rpx 0;
@@ -156,6 +157,7 @@ export default {
 .works-link,
 .works-browse {
 	margin: 10rpx 0;
+	font-size: 32rpx;
 }
 .works-link text,
 .works-browse text {
