@@ -1,29 +1,29 @@
 <template>
 	<view class="resume-works">
 		<wired-tabs selected="项目1" class="works-selected" :style="{ '--wired-item-selected-bg': selectedBg, '--wired-item-selected-color': selectedColor }">
-			<wired-tab v-for="(item,index) in worksArr" :key="index"  :name="item.selectedName">
+			<wired-tab v-for="(item, index) in worksArr" :key="index" :name="item.selectedName">
 				<view class="title-date">
-					<view class="title">{{item.worksTitle}}</view>
-					<view class="date">{{item.worksDate}}</view>
+					<view class="date">{{ item.worksDate }}</view>
+					<view class="title">{{ item.worksTitle }}</view>
 				</view>
 				<view class="content">
 					<view class="works-image" v-if="item.worksSrc">
 						<wired-image
 							:elevation="index >= 5 ? 5 : index"
 							:src="item.worksSrc"
-							class="swiper-img"
-							:style="{ color: exImageColor, width: exWidth, height: xeHeight }"
+							:class="item.worksBorder ? 'swiper-img-border' : 'swiper-img-noborder'"
+							:style="{ color: worImageColor, width: worWidth, height: worHeight }"
 						></wired-image>
 					</view>
 					<view class="content-list">
-						<view class="conten">{{item.worksContent}}</view>
+						<view class="conten">{{ item.worksContent }}</view>
 						<view class="list">
-							<view v-for="(items,indexs) in item.worksList">{{indexs+1}}.{{items}}</view>
+							<view v-for="(items, indexs) in item.worksList" :key="indexs">{{ indexs + 1 }}.{{ items }}</view>
 						</view>
 					</view>
 				</view>
-				<view class="works-link" v-if="item.worksLink">gitHub/gitee：{{item.worksLink}}</view>
-				<view class="works-browse" v-if="item.worksBrowse">>在线浏览：{{item.worksBrowse}}</view>
+				<view class="works-link" v-if="item.worksLink">gitHub/gitee：{{ item.worksLink }}</view>
+				<view class="works-browse" v-if="item.worksBrowse">>在线浏览：{{ item.worksBrowse }}</view>
 			</wired-tab>
 		</wired-tabs>
 	</view>
@@ -51,29 +51,60 @@ export default {
 				return '';
 			}
 		},
+		worImageColor: {
+			type: String,
+			default: () => {
+				return 'none';
+			}
+		},
+		worWidth: {
+			type: String,
+			default: () => {
+				return '300rpx';
+			}
+		},
+		worHeight: {
+			type: String,
+			default: () => {
+				return '300rpx';
+			}
+		},
 		worksArr: {
 			type: Array,
 			default: () => {
 				return [
 					{
-						selectedName:'项目1',
-						worksTitle: 'uni糗事百科',
-						worksSrc: 'https://www.gstatic.com/webp/gallery/4.sm.jpg',
+						selectedName: '项目1',
+						worksTitle: 'uniapp',
+						worksSrc: '../../static/uni-weChat-img.jpg',
+						worksBorder: true,
 						worksDate: '2020.07.10-2020.08.17',
-						worksContent: 'uni糗事百科是一个原创的糗事笑话分享社区,糗百网友分享的搞笑段子、搞笑图片大全,都是糗友最珍贵的开心经历,爆笑糗事笑话只在糗事百科!',
+						worksContent: 'uniapp是一个原创的xxx分享社区网友分享的xxx、图片大全,都是网友最珍贵的开心经历,xxxxx!',
 						worksList: ['使用了uniapp混合开发', '使用了element UI插件', '使用了xxxx'],
 						worksLink: 'https://uniapp.dcloud.io/',
 						worksBrowse: 'https://uniapp.dcloud.io/'
 					},
 					{
-						selectedName:'项目2',
-						worksTitle: '小程序糗事百科',
+						selectedName: '项目2',
+						worksTitle: '小程序uni',
 						worksSrc: '',
+						worksBorder: false,
 						worksDate: '2019.07.10-2019.08.17',
-						worksContent: '小程序糗事百科是一个原创的糗事笑话分享社区,糗百网友分享的搞笑段子、搞笑图片大全,都是糗友最珍贵的开心经历,爆笑糗事笑话只在糗事百科!',
+						worksContent: '小程序uni是一个原创的xxx分享社区网友分享的xxx、图片大全,都是网友最珍贵的开心经历,xxxxx!',
 						worksList: ['使用了微信小程序开发', '使用了element UI插件', '使用了xxxx'],
 						worksLink: 'https://uniapp.dcloud.io/',
 						worksBrowse: ''
+					},
+					{
+						selectedName: '项目3',
+						worksTitle: 'uniH5',
+						worksSrc: '../../static/uni-weChat-img.jpg',
+						worksBorder: false,
+						worksDate: '2020.07.10-2020.08.17',
+						worksContent: 'uniapp是一个原创的xxx分享社区网友分享的xxx、图片大全,都是网友最珍贵的开心经历,xxxxx!',
+						worksList: ['使用了uniapp混合开发', '使用了element UI插件', '使用了xxxx'],
+						worksLink: 'https://uniapp.dcloud.io/',
+						worksBrowse: 'https://uniapp.dcloud.io/'
 					}
 				];
 			}
@@ -83,8 +114,25 @@ export default {
 </script>
 
 <style scoped>
-.works-selected {
-	/* --wired-item-selected-bg:red;
-		--wired-item-selected-color:#ffff00; */
+.works-selected{
+	/* border: 1px solid red; */
+	padding: 0 10rpx;
+}
+.title-date{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 36rpx;
+	font-weight: bold;
+}
+.works-image{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 20rpx 0;
+}
+.swiper-img-border{
+	border-radius: 50%;
 }
 </style>

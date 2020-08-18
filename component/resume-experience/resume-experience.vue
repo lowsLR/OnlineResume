@@ -11,7 +11,7 @@
 								:elevation="index >= 5 ? 5 : index"
 								:src="item.exSrc"
 								class="swiper-img"
-								:style="{ color: exImageColor, width: exWidth, height: xeHeight }"
+								:style="{ color: exImageColor, width: exWidth, height: exHeight }"
 							></wired-image>
 						</view>
 						<view class="swiper-content">
@@ -88,7 +88,7 @@ export default {
 				return '240rpx';
 			}
 		},
-		xeHeight: {
+		exHeight: {
 			type: String,
 			default: () => {
 				return '200rpx';
