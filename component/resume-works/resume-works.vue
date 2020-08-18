@@ -8,12 +8,7 @@
 				</view>
 				<view class="content">
 					<view class="works-image" v-if="item.worksSrc">
-						<wired-image
-							:elevation="index >= 5 ? 5 : index"
-							:src="item.worksSrc"
-							:class="item.worksBorder ? 'swiper-img-border' : 'swiper-img-noborder'"
-							:style="{ color: worImageColor, width: worWidth, height: worHeight }"
-						></wired-image>
+						<wired-image :elevation="3" :src="item.worksSrc" :style="{ color: worImageColor, width: worWidth, height: worHeight }"></wired-image>
 					</view>
 					<view class="content-list">
 						<view class="conten">{{ item.worksContent }}</view>
@@ -22,8 +17,14 @@
 						</view>
 					</view>
 				</view>
-				<view class="works-link" v-if="item.worksLink">gitHub/gitee：{{ item.worksLink }}</view>
-				<view class="works-browse" v-if="item.worksBrowse">>在线浏览：{{ item.worksBrowse }}</view>
+				<view class="works-link" v-if="item.worksLink">
+					gitHub/gitee：
+					<text @click="navto(item.worksLink)">{{ item.worksLink }}</text>
+				</view>
+				<view class="works-browse" v-if="item.worksBrowse">
+					在线浏览：
+					<text @click="navto(item.worksLink)">{{ item.worksBrowse }}</text>
+				</view>
 			</wired-tab>
 		</wired-tabs>
 	</view>
@@ -54,7 +55,7 @@ export default {
 		worImageColor: {
 			type: String,
 			default: () => {
-				return 'none';
+				return '';
 			}
 		},
 		worWidth: {
@@ -77,7 +78,6 @@ export default {
 						selectedName: '项目1',
 						worksTitle: 'uniapp',
 						worksSrc: '../../static/uni-weChat-img.jpg',
-						worksBorder: true,
 						worksDate: '2020.07.10-2020.08.17',
 						worksContent: 'uniapp是一个原创的xxx分享社区网友分享的xxx、图片大全,都是网友最珍贵的开心经历,xxxxx!',
 						worksList: ['使用了uniapp混合开发', '使用了element UI插件', '使用了xxxx'],
@@ -88,7 +88,6 @@ export default {
 						selectedName: '项目2',
 						worksTitle: '小程序uni',
 						worksSrc: '',
-						worksBorder: false,
 						worksDate: '2019.07.10-2019.08.17',
 						worksContent: '小程序uni是一个原创的xxx分享社区网友分享的xxx、图片大全,都是网友最珍贵的开心经历,xxxxx!',
 						worksList: ['使用了微信小程序开发', '使用了element UI插件', '使用了xxxx'],
@@ -99,7 +98,6 @@ export default {
 						selectedName: '项目3',
 						worksTitle: 'uniH5',
 						worksSrc: '../../static/uni-weChat-img.jpg',
-						worksBorder: false,
 						worksDate: '2020.07.10-2020.08.17',
 						worksContent: 'uniapp是一个原创的xxx分享社区网友分享的xxx、图片大全,都是网友最珍贵的开心经历,xxxxx!',
 						worksList: ['使用了uniapp混合开发', '使用了element UI插件', '使用了xxxx'],
@@ -109,30 +107,58 @@ export default {
 				];
 			}
 		}
+	},
+	methods: {
+		navto(url) {
+			// console.log(url);
+			window.location.href = url;
+		}
 	}
 };
 </script>
 
 <style scoped>
-.works-selected{
+.works-selected {
+	min-height: 600rpx;
 	/* border: 1px solid red; */
 	padding: 0 10rpx;
 }
-.title-date{
+.works-selected:focus {
+	border: none;
+}
+.title-date {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	font-size: 36rpx;
 	font-weight: bold;
+	margin-bottom: 20rpx;
 }
-.works-image{
+.works-image {
 	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 20rpx 0;
 }
-.swiper-img-border{
-	border-radius: 50%;
+.content-list {
+	margin-top: 20rpx;
+}
+.content-list .conten {
+	margin: 10rpx 0;
+}
+.list {
+	display: flex;
+	flex-direction: column;
+}
+.list > view {
+	margin: 10rpx 0;
+}
+.works-link,
+.works-browse {
+	margin: 10rpx 0;
+}
+.works-link text,
+.works-browse text {
+	text-decoration: underline;
 }
 </style>
