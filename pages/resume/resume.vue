@@ -10,8 +10,9 @@
 			<resume-works></resume-works>
 			<!-- 联系 -->
 			<resume-contact></resume-contact>
+			<!-- 尾部 -->
+			<resume-footer></resume-footer>
 		</wired-card>
-		<!-- 尾部 -->
 	</view>
 </template>
 
@@ -20,13 +21,15 @@ import resumeHeader from '../../component/resume-header/resume-header.vue';
 import resumeExperience from '../../component/resume-experience/resume-experience.vue';
 import resumeWorks from '../../component/resume-works/resume-works.vue';
 import resumeContact from '../../component/resume-contact/resume-contact.vue';
+import resumeFooter from '../../component/resume-footer/resume-footer.vue';
 export default {
 	name: 'resume',
 	components: {
 		resumeHeader,
 		resumeExperience,
 		resumeWorks,
-		resumeContact
+		resumeContact,
+		resumeFooter
 	},
 	data() {
 		return {

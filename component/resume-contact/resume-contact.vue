@@ -3,11 +3,11 @@
 		<view class="contact-content">
 			<view class="contact-title">联系方式</view>
 			<view class="contact-list-icon">
-				<wired-icon-button class="red" v-for="(item, index) in contactArr" :key="index" @click="showContact(item)"><image :src="item.icon"></image></wired-icon-button>
+				<wired-icon-button class="list-icon" v-for="(item, index) in contactArr" :key="index" @click="showContact(item)" :style="{color:contactColor}"><image :src="item.icon" :style="{'background-color':contactBgColor}"></image></wired-icon-button>
 			</view>
 		</view>
 		<view class="contact-show-content" v-if="contactList.length">
-			<view class="contact-list" v-for="(items, indexs) in contactList" :key="indexs"><text>{{items.contactName}}:</text><text>{{items.contactText}}</text></view>
+			<view class="contact-list" v-for="(items, indexs) in contactList" :key="indexs"><view>{{items.contactName}}:</view><view>{{items.contactText}}</view></view>
 		</view>
 	</view>
 	<!-- School, major, mobile phone, email, wechat, QQ, Sina, microblog, blog Garden, Zhihu -->
@@ -101,7 +101,19 @@ export default {
 					}
 				];
 			}
-		}
+		},
+		contactColor:{
+			type:String,
+			default:()=>{
+				return '#ffffff'
+			}
+		},
+		contactBgColor:{
+			type:String,
+			default:()=>{
+				return '#ffffff'
+			}
+		},
 	},
 	data() {
 		return {
@@ -125,4 +137,55 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+	.resume-contact{
+		padding: 20rpx;
+	}
+	.contact-content{}
+	.contact-title{
+		font-size: 40rpx;
+		font-weight: bold;
+		margin: 10rpx 0 20rpx 0;
+		width: 100%;
+		/* border: 1px solid red; */
+		text-align: center;
+	}
+	.contact-list-icon{
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		/* border: 1px solid red; */
+	}
+	.list-icon{
+		color: #FFFFFF;
+		/* background-color: red; */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 20%;
+		margin: 10rpx 0;
+	}
+	.list-icon image{
+		width:60rpx;
+		height:60rpx;
+		background-color: #FFFFFF;
+		border-radius: 50%;
+	}
+	.contact-show-content{
+		padding: 10rpx 20rpx;
+	}
+	.contact-list{
+		font-size: 36rpx;
+		display: flex;
+		align-items: center;
+	}
+	.contact-list view:first-child{
+		font-weight: bold;
+		width: 180rpx;
+	}
+	.contact-list view:last-child{
+		font-weight: 400;
+		flex: 1;
+		text-align: left;
+	}
+</style>
