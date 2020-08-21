@@ -34,7 +34,7 @@ export default {
 	data() {
 		return {
 			fill: '#333',
-			linearGradient: 'linear-gradient(to top left, #b1b1b1, #f2f2f2);'
+			linearGradient: 'linear-gradient(to top left, #b1b1b1, #f2f2f2)'
 		};
 	}
 };
