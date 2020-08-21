@@ -159,6 +159,7 @@ page {
 .resume-experience {
 	/* border: 1px solid red; */
 	margin-top: 20rpx;
+	padding: 10rpx;
 }
 .swiper-layout {
 	padding: 0 10rpx;

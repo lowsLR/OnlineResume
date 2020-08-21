@@ -260,5 +260,6 @@ export default {
 	font-size: 36rpx;
 	font-weight: 400;
 	line-height: 50rpx;
+	padding: 0 10rpx;
 }
 </style>

@@ -1,7 +1,9 @@
 <template>
 	<view class="resume-footer">
-		<view class="footer-list" v-for="(item, index) in footerArr" :key="index">{{ item }}</view>
-		<view class="footer-flag" v-if="footerIsFlag"></view>
+		<view class="footer-list" v-for="(item, index) in footerArr" :key="index">
+			<text>{{ item }}</text>
+		</view>
+		<view class="footer-flag" v-if="footerIsFlag">Copyright ©LR All rights reserved</view>
 	</view>
 </template>
 
@@ -26,7 +28,22 @@ export default {
 </script>
 
 <style scoped>
-	.resume-footer{
-		
-	}
+.resume-footer {
+	padding: 10rpx;
+	padding-left: 20rpx;
+}
+.footer-list {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 40rpx;
+}
+.footer-flag {
+	border-top: 1rpx solid #ffffff;
+	text-align: center;
+	line-height: 50rpx;
+	font-size: 15px;
+	margin-top: 10rpx;
+}
 </style>
