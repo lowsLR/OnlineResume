@@ -1,15 +1,21 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/resume/resume",
+			"path": "pages/establish/establish",
 			"style": {
-				"transparentTitle":"always"
+				"navigationBarTitleText": "简历自定义"
 			}
 		},
 		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "使用Wired Elements制作简历"
+			}
+		},
+		{
+			"path": "pages/resume/resume",
+			"style": {
+				"transparentTitle":"always"
 			}
 		}
 	],

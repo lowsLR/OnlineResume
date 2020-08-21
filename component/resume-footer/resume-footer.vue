@@ -42,8 +42,8 @@ export default {
 .footer-flag {
 	border-top: 1rpx solid #ffffff;
 	text-align: center;
-	line-height: 50rpx;
-	font-size: 15px;
+	/* line-height: 40rpx; */
+	font-size: 20rpx;
 	margin-top: 10rpx;
 }
 </style>

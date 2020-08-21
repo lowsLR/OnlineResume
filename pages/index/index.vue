@@ -15,9 +15,9 @@
 		</view>
 
 		<view class="toUse">
-			<view><wired-link elevation="1" href="https://wiredjs.com/showcase.html" target="_blank">组件库展示</wired-link></view>
+			<view><wired-link elevation="5" href="https://wiredjs.com/showcase.html" target="_blank">组件库展示</wired-link></view>
 			<view>
-				<wired-listbox horizontal selected="One" class="customListBox"><wired-item value="One" @click="resume">在线简历</wired-item></wired-listbox>
+				<wired-listbox horizontal selected="one" class="customListBox" @selected="establish"><wired-item value="one">主题简历</wired-item></wired-listbox>
 			</view>
 		</view>
 	</view>
@@ -26,16 +26,14 @@
 <script>
 export default {
 	data() {
-		return {
-			title: 'Hello'
-		};
+		return {};
 	},
 	onLoad() {},
 	methods: {
-		resume(){
+		establish() {
 			uni.navigateTo({
-				url:'../resume/resume'
-			})
+				url: '../establish/establish'
+			});
 		}
 	}
 };
