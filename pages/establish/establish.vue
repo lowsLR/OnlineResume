@@ -12,12 +12,28 @@
 			<!-- 9.尾部结束语填写-以及是否显示版权 -->
 
 			<!-- 需要解决的问题，1.from表单，2.图片上传，3.动态添加多个input框 -->
-
 			<form @submit="formSubmit" @reset="formReset">
-				
+				<view class="uni-switch">
+					<view class="switch-title">是否自定义主题颜色</view>
+					<view class="toggle-switch"></view>
+					<wired-toggle :checked="themeChecked" @change="themeFun(themeChecked)"></wired-toggle>
+					<switch name="switchTheme" :checked="themeChecked" v-show="false" />
+				</view>
+				<view class="uni-switch" v-if="themeChecked">
+					<view class="switch-title">是否自定基本信息背景色</view>
+					<view class="toggle-switch"></view>
+					<wired-toggle :checked="infoChecked" @change="infoFun(infoChecked)"></wired-toggle>
+					<switch name="switchInfo" :checked="infoChecked" v-show="false" />
+				</view>
+				<view class="uni-switch" v-if="themeChecked">
+					<view class="switch-title">是否自定义线条颜色</view>
+					<view class="toggle-switch"></view>
+					<wired-toggle :checked="lineChecked" @change="lineFun(lineChecked)"></wired-toggle>
+					<switch name="switchLine" :checked="lineChecked" v-show="false" />
+				</view>
 				<view class="uni-btn-v">
-					<button form-type="submit"><wired-button class="submit">提交</wired-button></button>
-					<button form-type="reset"><wired-button class="reset" elevation="3" form-type="reset">重置</wired-button></button>
+					<button form-type="submit"><wired-button class="wired-button">提交</wired-button></button>
+					<button type="default" form-type="reset"><wired-button elevation="3" class="wired-button">重置</wired-button></button>
 				</view>
 			</form>
 		</view>
@@ -25,10 +41,18 @@
 </template>
 
 <script>
+let _self;
 export default {
 	name: 'establish',
 	data() {
-		return {};
+		return {
+			themeChecked: false,
+			infoChecked: false,
+			lineChecked: false
+		};
+	},
+	onLoad() {
+		_self = this;
 	},
 	methods: {
 		formSubmit: function(e) {
@@ -36,32 +60,47 @@ export default {
 		},
 		formReset: function(e) {
 			console.log('清空数据');
+		},
+		themeFun(e) {
+			_self.themeChecked = !_self.themeChecked;
+		},
+		infoFun(e) {
+			_self.infoChecked = !_self.infoChecked;
+		},
+		lineFun(e) {
+			_self.lineChecked = !_self.lineChecked;
 		}
 	}
 };
 </script>
 
 <style scoped>
-button::after {
-	border: none;
-	outline: none;
-}
-button {
-	background-color: transparent;
-	width: 100%;
-}
-input {
-	background: none;
-	outline: none;
-	border: none;
+.establish-layout {
+	padding: 10rpx;
+	font-size: 36rpx;
 }
 .uni-btn-v {
-	/* padding: 10rpx; */
 	display: flex;
 	align-items: center;
+	justify-content: space-around;
 }
-.submit,
-.reset {
-	width: 100%;
+.uni-btn-v button {
+	background-color: transparent;
+	/* border: 1px solid red; */
+}
+.uni-btn-v button::after {
+	outline: none;
+	border: none;
+}
+.wired-button {
+	width: 300rpx;
+	/* border: 1px solid red; */
+}
+.switch-title {
+	margin: 20rpx 0;
+}
+.toggle-switch {
+	display: flex;
+	align-items: center;
 }
 </style>
