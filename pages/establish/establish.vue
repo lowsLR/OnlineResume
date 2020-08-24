@@ -10,16 +10,58 @@
 			<!-- 7.项目填写 -->
 			<!-- 8.联系填写 -->
 			<!-- 9.尾部结束语填写-以及是否显示版权 -->
-			
+
 			<!-- 需要解决的问题，1.from表单，2.图片上传，3.动态添加多个input框 -->
+
+			<form @submit="formSubmit" @reset="formReset">
+				
+				<view class="uni-btn-v">
+					<button form-type="submit"><wired-button class="submit">提交</wired-button></button>
+					<button form-type="reset"><wired-button class="reset" elevation="3" form-type="reset">重置</wired-button></button>
+				</view>
+			</form>
 		</view>
 	</view>
 </template>
 
 <script>
 export default {
-	name: 'establish'
+	name: 'establish',
+	data() {
+		return {};
+	},
+	methods: {
+		formSubmit: function(e) {
+			console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value));
+		},
+		formReset: function(e) {
+			console.log('清空数据');
+		}
+	}
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+button::after {
+	border: none;
+	outline: none;
+}
+button {
+	background-color: transparent;
+	width: 100%;
+}
+input {
+	background: none;
+	outline: none;
+	border: none;
+}
+.uni-btn-v {
+	/* padding: 10rpx; */
+	display: flex;
+	align-items: center;
+}
+.submit,
+.reset {
+	width: 100%;
+}
+</style>
