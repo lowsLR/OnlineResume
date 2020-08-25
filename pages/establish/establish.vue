@@ -76,6 +76,31 @@
 							<wired-radio name="bad" class="customB" @click="genderRadio('bad', 'state')">宅{{ radioState }}</wired-radio>
 						</wired-radio-group>
 					</view>
+					<!-- 姓名之类基本信息 用正则表达式去除省和市，限制6个字左右-->
+					<view class="info-header">
+						<!-- <view class="uni-form-item uni-column" v-show="false">
+							<input class="uni-input" name="age" placeholder="年龄"  v-model="age"/>
+							<input class="uni-input" name="nation" placeholder="民族"  v-model="nation"/>
+							<input class="uni-input" name="place" placeholder="地方"  v-model="place"/>
+							<input class="uni-input" name="education" placeholder="学历"  v-model="education"/>
+						</view> -->
+						<view class="wiredInput">
+							<view class="title-inp">
+								<view class="wired-title">年龄：</view>
+								<wired-input placeholder="年年18" @input="test" :value="age"></wired-input>
+							</view>
+							<view class="title-inp">
+								<view class="wired-title">民族：</view>
+								<wired-input placeholder="默认为汉族" v-model="nation"></wired-input>
+							</view><view class="title-inp">
+								<view class="wired-title">户籍：</view>
+								<wired-input placeholder="例:广东广州" v-model="place"></wired-input>
+							</view><view class="title-inp">
+								<view class="wired-title">学历：</view>
+								<wired-input placeholder="活着自在最重要" v-model="education"></wired-input>
+							</view>
+						</view>
+					</view>
 					<!-- 提交 -->
 					<view class="uni-btn-v">
 						<button form-type="submit"><wired-button class="wired-button">提交</wired-button></button>
@@ -93,15 +118,21 @@ export default {
 	name: 'establish',
 	data() {
 		return {
-			themeChecked: false,
-			infoChecked: false,
-			lineChecked: false,
-			imgSrc: '',
+			themeChecked: false,//是否自定义
+			infoChecked: false,//是否自定基本信息背景色
+			lineChecked: false,//是否自定基本信息背景色
+			imgSrc: '',//头像
+			//性别
 			checkedM: false,
 			checkedW: false,
+			//健康
 			checkedG: false,
 			checkedB: false,
-			radioState: ''
+			radioState: '',
+			age:'123',//姓名
+			nation:'',//民族
+			place:'',//地方
+			education:''//学历
 		};
 	},
 	onLoad() {
@@ -155,13 +186,16 @@ export default {
 				if (e == 'men') {
 					this.checkedM = true;
 					this.checkedW = false;
-					this.radioState = '男'
+					this.radioState = '男';
 				} else {
 					this.checkedM = false;
 					this.checkedW = true;
-					this.radioState = '女'
+					this.radioState = '女';
 				}
 			}
+		},
+		test(event){
+			console.log(event,"==>event")
 		}
 	}
 };
@@ -223,6 +257,6 @@ export default {
 	--wired-radio-icon-color: #00aa00;
 }
 .customB {
-	--wired-radio-icon-color:#333333;
+	--wired-radio-icon-color: #333333;
 }
 </style>
