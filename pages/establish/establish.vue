@@ -39,6 +39,43 @@
 						<image :src="imgSrc" mode="" v-if="imgSrc"></image>
 					</view>
 					<!-- 性别 -->
+					<view class="radio-gender" v-show="false">
+						<radio-group name="gender">
+							<label>
+								<radio value="men" :checked="checkedM" />
+								<text>男</text>
+							</label>
+							<label>
+								<radio value="women" :checked="checkedW" />
+								<text>女</text>
+							</label>
+						</radio-group>
+					</view>
+					<view class="wired-radio-gende">
+						<wired-radio-group>
+							<wired-radio name="men" class="customM" @click="genderRadio('men', 'gende')">男</wired-radio>
+							<wired-radio name="women" class="customW" @click="genderRadio('women', 'gende')">女</wired-radio>
+						</wired-radio-group>
+					</view>
+					<!-- 身体状态 -->
+					<view class="radio-state" v-show="false">
+						<radio-group name="state">
+							<label>
+								<radio value="good" :checked="checkedG" />
+								<text>健康良好</text>
+							</label>
+							<label>
+								<radio value="bad" :checked="checkedB" />
+								<text>宅{{ radioState }}</text>
+							</label>
+						</radio-group>
+					</view>
+					<view class="wired-radio-state">
+						<wired-radio-group>
+							<wired-radio name="good" class="customG" @click="genderRadio('good', 'state')">健康良好</wired-radio>
+							<wired-radio name="bad" class="customB" @click="genderRadio('bad', 'state')">宅{{ radioState }}</wired-radio>
+						</wired-radio-group>
+					</view>
 					<!-- 提交 -->
 					<view class="uni-btn-v">
 						<button form-type="submit"><wired-button class="wired-button">提交</wired-button></button>
@@ -59,7 +96,12 @@ export default {
 			themeChecked: false,
 			infoChecked: false,
 			lineChecked: false,
-			imgSrc: ''
+			imgSrc: '',
+			checkedM: false,
+			checkedW: false,
+			checkedG: false,
+			checkedB: false,
+			radioState: ''
 		};
 	},
 	onLoad() {
@@ -98,6 +140,28 @@ export default {
 					});
 				}
 			});
+		},
+		genderRadio(e, type) {
+			// console.log('e==>', e);
+			if (type == 'state') {
+				if (e == 'good') {
+					this.checkedG = true;
+					this.checkedB = false;
+				} else {
+					this.checkedG = false;
+					this.checkedB = true;
+				}
+			} else {
+				if (e == 'men') {
+					this.checkedM = true;
+					this.checkedW = false;
+					this.radioState = '男'
+				} else {
+					this.checkedM = false;
+					this.checkedW = true;
+					this.radioState = '女'
+				}
+			}
 		}
 	}
 };
@@ -148,5 +212,17 @@ export default {
 .lineColor {
 	--wired-toggle-off-color: #f59;
 	--wired-toggle-on-color: #f50;
+}
+.customM {
+	--wired-radio-icon-color: #55aaff;
+}
+.customW {
+	--wired-radio-icon-color: #f59;
+}
+.customG {
+	--wired-radio-icon-color: #00aa00;
+}
+.customB {
+	--wired-radio-icon-color:#333333;
 }
 </style>
