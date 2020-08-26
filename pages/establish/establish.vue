@@ -11,25 +11,23 @@
 		<!-- 9.尾部结束语填写-以及是否显示版权 -->
 
 		<!-- 需要解决的问题，1.from表单，2.图片上传，3.动态添加多个input框 -->
-		<wired-card elevation="3" class="card-form">
+		<!-- textarea 的需要用正则去除换行和字符操作 -->
+		<wired-card elevation="2" class="card-form">
 			<view class="resume-establish">
 				<form @submit="formSubmit" @reset="formReset">
 					<!-- 是否自定义 -->
 					<view class="uni-switch">
 						<view class="switch-title">是否自定义主题颜色</view>
-						<view class="toggle-switch"></view>
 						<wired-toggle :checked="themeChecked" @change="themeFun(themeChecked)"></wired-toggle>
 						<switch name="switchTheme" :checked="themeChecked" v-show="false" />
 					</view>
 					<view class="uni-switch" v-if="themeChecked">
 						<view class="switch-title">是否自定基本信息背景色</view>
-						<view class="toggle-switch"></view>
 						<wired-toggle :checked="infoChecked" @change="infoFun(infoChecked)" class="infoColor"></wired-toggle>
 						<switch name="switchInfo" :checked="infoChecked" v-show="false" />
 					</view>
 					<view class="uni-switch" v-if="themeChecked">
 						<view class="switch-title">是否自定义线条颜色</view>
-						<view class="toggle-switch"></view>
 						<wired-toggle :checked="lineChecked" @change="lineFun(lineChecked)" class="lineColor"></wired-toggle>
 						<switch name="switchLine" :checked="lineChecked" v-show="false" />
 					</view>
@@ -78,26 +76,50 @@
 					</view>
 					<!-- 姓名之类基本信息 用正则表达式去除省和市，限制6个字左右-->
 					<view class="info-header">
-						<!-- <view class="uni-form-item uni-column" v-show="false">
-							<input class="uni-input" name="age" placeholder="年龄"  v-model="age"/>
-							<input class="uni-input" name="nation" placeholder="民族"  v-model="nation"/>
-							<input class="uni-input" name="place" placeholder="地方"  v-model="place"/>
-							<input class="uni-input" name="education" placeholder="学历"  v-model="education"/>
-						</view> -->
-						<view class="wiredInput">
-							<view class="title-inp">
-								<view class="wired-title">年龄：</view>
-								<wired-input placeholder="年年18" @input="test" :value="age"></wired-input>
-							</view>
-							<view class="title-inp">
-								<view class="wired-title">民族：</view>
-								<wired-input placeholder="默认为汉族" v-model="nation"></wired-input>
-							</view><view class="title-inp">
-								<view class="wired-title">户籍：</view>
-								<wired-input placeholder="例:广东广州" v-model="place"></wired-input>
-							</view><view class="title-inp">
-								<view class="wired-title">学历：</view>
-								<wired-input placeholder="活着自在最重要" v-model="education"></wired-input>
+						<view class="title-inp">
+							<view class="inp-title">年龄：</view>
+							<wired-card elevation="1" class="card-info"><input class="uni-input" name="age" placeholder="年年18" v-model="age" /></wired-card>
+						</view>
+						<view class="title-inp">
+							<view class="inp-title">民族：</view>
+							<wired-card elevation="1" class="card-info"><input class="uni-input" name="nation" placeholder="默认为汉族" v-model="nation" /></wired-card>
+						</view>
+						<view class="title-inp">
+							<view class="inp-title">户籍：</view>
+							<wired-card elevation="1" class="card-info"><input class="uni-input" name="place" placeholder="例:广东广州" v-model="place" /></wired-card>
+						</view>
+						<view class="title-inp">
+							<view class="inp-title">学历：</view>
+							<wired-card elevation="1" class="card-info"><input class="uni-input" name="education" placeholder="活着自在最重要" v-model="education" /></wired-card>
+						</view>
+					</view>
+					<!-- 简介 -->
+					<view class="introduction">
+						<view class="int-title">简介内容：</view>
+						<view class="int-brief">
+							<wired-card elevation="1" class="card-int"><textarea auto-height placeholder="请用一句话描述简介标题" name="intTitle" /></wired-card>
+						</view>
+						<view class="int-content">
+							<wired-card elevation="1" class="card-int"><textarea auto-height placeholder="用几句简单的话语介绍自己" name="intContent" /></wired-card>
+						</view>
+					</view>
+					<!-- 尾部 -->
+					<view class="footer">
+						<view class="footer-content">
+							<wired-card elevation="1" class="card-footer">
+								<textarea auto-height placeholder="以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;" name="footerContent" />
+							</wired-card>
+							<view class="copyright">	
+								<view class="copyright-title">
+									著重权是否显示：
+								</view>
+								<view class="switch-cop"><wired-toggle :checked="copChecked" @change="copyrightFun(copChecked)" class="copColor"></wired-toggle>
+								<switch name="switchCop" :checked="copChecked" v-show="false" /></view>
+								<view class="cop-contnet" v-if="copChecked">
+									<wired-card elevation="1" class="card-int">
+										<textarea auto-height placeholder="以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;" name="footerContent" />
+									</wired-card>
+								</view>
 							</view>
 						</view>
 					</view>
@@ -118,10 +140,10 @@ export default {
 	name: 'establish',
 	data() {
 		return {
-			themeChecked: false,//是否自定义
-			infoChecked: false,//是否自定基本信息背景色
-			lineChecked: false,//是否自定基本信息背景色
-			imgSrc: '',//头像
+			themeChecked: false, //是否自定义
+			infoChecked: false, //是否自定基本信息背景色
+			lineChecked: false, //是否自定基本信息背景色
+			imgSrc: '', //头像
 			//性别
 			checkedM: false,
 			checkedW: false,
@@ -129,10 +151,11 @@ export default {
 			checkedG: false,
 			checkedB: false,
 			radioState: '',
-			age:'123',//姓名
-			nation:'',//民族
-			place:'',//地方
-			education:''//学历
+			age: '123', //姓名
+			nation: '', //民族
+			place: '', //地方
+			education: '' ,//学历
+			copChecked:false//著重权是否显示
 		};
 	},
 	onLoad() {
@@ -194,8 +217,8 @@ export default {
 				}
 			}
 		},
-		test(event){
-			console.log(event,"==>event")
+		copyrightFun(e) {
+			_self.copChecked = !_self.copChecked;
 		}
 	}
 };
@@ -235,10 +258,6 @@ export default {
 .switch-title {
 	margin: 20rpx 0;
 }
-.toggle-switch {
-	display: flex;
-	align-items: center;
-}
 .infoColor {
 	--wired-toggle-off-color: red;
 	--wired-toggle-on-color: green;
@@ -258,5 +277,9 @@ export default {
 }
 .customB {
 	--wired-radio-icon-color: #333333;
+}
+.copColor{
+	--wired-toggle-off-color: #55aaff;
+	--wired-toggle-on-color: #f59;
 }
 </style>
