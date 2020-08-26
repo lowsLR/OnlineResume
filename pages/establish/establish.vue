@@ -123,6 +123,21 @@
 							</view>
 						</view>
 					</view>
+					<!-- 经历 -->
+					<view class="works-layout">
+						<view class="works">
+							<!-- <view class="exSrc">
+								<view @click="chooseImageH">上传图片</view>
+								<image :src="imgSrc" mode="" v-if="imgSrc" name="testImg"></image>
+							</view> -->
+							<wired-card elevation="1" class="card-works"><input class="uni-input" name="exName" placeholder="公司名" v-model="exName" /></wired-card>
+							<wired-card elevation="1" class="card-works">
+								<textarea auto-height placeholder="以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;" name="exsContent" />
+							</wired-card>
+						</view>
+					</view>
+					<!-- 项目 -->
+					<!-- 联系方式 -->
 					<!-- 提交 -->
 					<view class="uni-btn-v">
 						<button form-type="submit"><wired-button class="wired-button">提交</wired-button></button>
