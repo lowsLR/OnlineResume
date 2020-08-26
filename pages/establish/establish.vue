@@ -109,12 +109,12 @@
 							<wired-card elevation="1" class="card-footer">
 								<textarea auto-height placeholder="以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;" name="footerContent" />
 							</wired-card>
-							<view class="copyright">	
-								<view class="copyright-title">
-									著重权是否显示：
+							<view class="copyright">
+								<view class="copyright-title">著重权是否显示：</view>
+								<view class="switch-cop">
+									<wired-toggle :checked="copChecked" @change="copyrightFun(copChecked)" class="copColor"></wired-toggle>
+									<switch name="switchCop" :checked="copChecked" v-show="false" />
 								</view>
-								<view class="switch-cop"><wired-toggle :checked="copChecked" @change="copyrightFun(copChecked)" class="copColor"></wired-toggle>
-								<switch name="switchCop" :checked="copChecked" v-show="false" /></view>
 								<view class="cop-contnet" v-if="copChecked">
 									<wired-card elevation="1" class="card-int">
 										<textarea auto-height placeholder="以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;" name="footerContent" />
@@ -125,15 +125,31 @@
 					</view>
 					<!-- 经历 -->
 					<view class="works-layout">
-						<view class="works">
-							<!-- <view class="exSrc">
-								<view @click="chooseImageH">上传图片</view>
-								<image :src="imgSrc" mode="" v-if="imgSrc" name="testImg"></image>
-							</view> -->
-							<wired-card elevation="1" class="card-works"><input class="uni-input" name="exName" placeholder="公司名" v-model="exName" /></wired-card>
-							<wired-card elevation="1" class="card-works">
-								<textarea auto-height placeholder="以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;" name="exsContent" />
-							</wired-card>
+						<view class="works-seleter">
+							<view id="works-title">选择‘经验’所要填写的数量</view>
+							<wired-combo class="combo" @selected="worksCombo" ref="worksRef" selected="1">
+								<wired-item value="1">一份</wired-item>
+								<wired-item value="2">两份</wired-item>
+								<wired-item value="3">三份</wired-item>
+								<wired-item value="4">四份</wired-item>
+								<wired-item value="5">五份</wired-item>
+								<wired-item value="6">六份</wired-item>
+								<wired-item value="7">七份</wired-item>
+								<wired-item value="8">八份</wired-item>
+								<wired-item value="9">九份</wired-item>
+							</wired-combo>
+						</view>
+						<view class="works-container" v-for="(item, index) in worksArr" :key="index">
+							<view class="works-content">
+								<view class="exSrc">
+									<view @click="chooseImageWorks(index)">上传图片</view>
+									<image :src="item.worksImg" mode="" v-if="item.worksImg"></image>
+								</view>
+								<wired-card elevation="1" class="card-works"><input class="uni-input" :name="item.worksName" placeholder="公司名" /></wired-card>
+								<wired-card elevation="1" class="card-works">
+									<textarea auto-height placeholder="以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;" :name="item.worksContent" />
+								</wired-card>
+							</view>
 						</view>
 					</view>
 					<!-- 项目 -->
@@ -169,8 +185,15 @@ export default {
 			age: '123', //姓名
 			nation: '', //民族
 			place: '', //地方
-			education: '' ,//学历
-			copChecked:false//著重权是否显示
+			education: '', //学历
+			copChecked: false, //著重权是否显示
+			worksArr: [
+				{
+					worksImg: '',
+					worksName: 'worksName1',
+					worksContent: 'worksContent1'
+				}
+			] //works渲染的数量
 		};
 	},
 	onLoad() {
@@ -234,6 +257,34 @@ export default {
 		},
 		copyrightFun(e) {
 			_self.copChecked = !_self.copChecked;
+		},
+		chooseImageWorks(i) {
+			console.log(i, 'chooseImageWorks');
+		},
+		worksCombo(e) {
+			console.log('dian l  ji ci??');
+			this.worksArr = [];
+			console.log(this.$refs.worksRef.selected, '==>refs');
+			let index = this.$refs.worksRef.selected - 0;
+			if (index <= 1) {
+				this.worksArr = [
+					{
+						worksImg: '',
+						worksName: 'worksName1',
+						worksContent: 'worksContent1'
+					}
+				];
+			} else {
+				for (let i = 1; i < index + 1; i++) {
+					let obj = {
+						worksImg: '',
+						worksName: `worksName${i}`,
+						worksContent: `worksContent${i}`
+					};
+					this.worksArr.push(obj);
+				}
+				console.log(this.worksArr, '==>this.worksArr');
+			}
 		}
 	}
 };
@@ -293,7 +344,7 @@ export default {
 .customB {
 	--wired-radio-icon-color: #333333;
 }
-.copColor{
+.copColor {
 	--wired-toggle-off-color: #55aaff;
 	--wired-toggle-on-color: #f59;
 }
