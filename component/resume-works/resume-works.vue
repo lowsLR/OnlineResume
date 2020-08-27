@@ -23,7 +23,7 @@
 				</view>
 				<view class="works-browse" v-if="item.worksBrowse">
 					在线浏览：
-					<text @click="navto(item.worksLink)">{{ item.worksBrowse }}</text>
+					<text @click="navto(item.worksBrowse)">{{ item.worksBrowse }}</text>
 				</view>
 			</wired-tab>
 		</wired-tabs>
