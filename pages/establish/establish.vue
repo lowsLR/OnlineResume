@@ -188,24 +188,24 @@
 										@blur="worksInp"
 										placeholder="选项框对应的项目"
 										:data-index="index"
-										:data-name="selectedName"
+										data-name="selectedName"
 										:value="item.selectedName"
 									/>
 								</wired-card>
 								<wired-card elevation="1" class="card-works">
-									<input class="uni-input" @blur="worksInp" placeholder="项目名" :data-index="index" :data-name="worksTitle" :value="item.worksTitle" />
+									<input class="uni-input" @blur="worksInp" placeholder="项目名" :data-index="index" data-name="worksTitle" :value="item.worksTitle" />
 								</wired-card>
 								<wired-card elevation="1" class="card-works">
-									<input class="uni-input" @blur="worksInp" placeholder="日期" :data-index="index" :data-name="worksDate" :value="item.worksDate" />
+									<input class="uni-input" @blur="worksInp" placeholder="日期" :data-index="index" data-name="worksDate" :value="item.worksDate" />
 								</wired-card>
 								<wired-card elevation="1" class="card-works">
-									<input class="uni-input" @blur="worksInp" placeholder="项目简介" :data-index="index" :data-name="worksContent" :value="item.worksContent" />
+									<input class="uni-input" @blur="worksInp" placeholder="项目简介" :data-index="index" data-name="worksContent" :value="item.worksContent" />
 								</wired-card>
 								<wired-card elevation="1" class="card-works">
-									<input class="uni-input" @blur="worksInp" placeholder="源码地址" :data-index="index" :data-name="worksLink" :value="item.worksLink" />
+									<input class="uni-input" @blur="worksInp" placeholder="源码地址" :data-index="index" data-name="worksLink" :value="item.worksLink" />
 								</wired-card>
 								<wired-card elevation="1" class="card-works">
-									<input class="uni-input" @blur="worksInp" placeholder="在线浏览地址" :data-index="index" :data-name="worksBrowse" :value="item.worksBrowse" />
+									<input class="uni-input" @blur="worksInp" placeholder="在线浏览地址" :data-index="index" data-name="worksBrowse" :value="item.worksBrowse" />
 								</wired-card>
 								<wired-card elevation="1" class="card-ex">
 									<textarea
@@ -220,6 +220,23 @@
 						</view>
 					</view>
 					<!-- 联系方式 -->
+					<view class="contact-layout">
+						<view class="contact-checkbox">
+							<view v-for="(item, index) in contactArr" :key="index">
+								<view class="contact-title">联系方式</view>
+								<wired-checkbox @change="contactCheckbox" :checked="item.checked" :data-index="index">
+									{{ item.contactName }}
+								</wired-checkbox>
+							</view>
+						</view>
+						<view class="contact-list">
+							<view class="contact-text" v-for="(item,index) in contactArr" :key="index" v-if="item.checked">
+								<image :src="item.icon" mode=""></image>
+								<wired-card elevation="1" class="card-contact"><input class="uni-input" :name="item.contact" :placeholder="item.placeholder" /></wired-card>
+							</view>
+						</view>
+						<!-- --wired-checkbox-icon-color Color of the checkbox. Default is currentColor. -->
+					</view>
 					<!-- 提交 -->
 					<view class="uni-btn-v">
 						<button form-type="submit"><wired-button class="wired-button">提交</wired-button></button>
@@ -271,7 +288,97 @@ export default {
 					worksLink: '',
 					worksBrowse: ''
 				}
-			] //works渲染的数量
+			], //works渲染的数量
+			contactArr: [
+				{
+					icon: '../../static/res/school.png',
+					contactText: '',
+					contact: 'school',
+					contactName: '学校',
+					checked: true,
+					placeholder:'请输入学校'
+				},
+				{
+					icon: '../../static/res/email.png',
+					contactText: '',
+					contact: 'email',
+					contactName: '邮箱',
+					checked: true,
+					placeholder:'请输入邮箱'
+				},
+				{
+					icon: '../../static/res/phone.png',
+					contactText: '',
+					contact: 'phone',
+					contactName: '手机号码',
+					checked: true,
+					placeholder:'请输入手机号码'
+				},
+				{
+					icon: '../../static/res/dizhi.png',
+					contactText: '',
+					contact: 'dizhi',
+					contactName: '地址',
+					checked: true,
+					placeholder:'请输入地址'
+				},
+				{
+					icon: '../../static/res/QQ.png',
+					contactText: '',
+					contact: 'QQ',
+					contactName: 'qq',
+					checked: false,
+					placeholder:'请输入qq'
+				},
+				{
+					icon: '../../static/res/wechat.png',
+					contactText: '',
+					contact: 'wechat',
+					contactName: '微信',
+					checked: false,
+					placeholder:'请输入微信'
+				},
+				{
+					icon: '../../static/res/bokeyyuan.png',
+					contactText: '',
+					contact: 'bokeyyuan',
+					contactName: '博客园',
+					checked: false,
+					placeholder:'请输入博客园'
+				},
+				{
+					icon: '../../static/res/gitee-fill-round.png',
+					contactText: '',
+					contact: 'gitee-fill-round',
+					contactName: '码云',
+					checked: false,
+					placeholder:'请输入码云'
+				},
+				{
+					icon: '../../static/res/github.png',
+					contactText: '',
+					contact: 'github',
+					contactName: 'github',
+					checked: false,
+					placeholder:'请输入github'
+				},
+				{
+					icon: '../../static/res/xinlang.png',
+					contactText: '',
+					contact: 'xinlang',
+					contactName: '新浪',
+					checked: false,
+					placeholder:'请输入新浪'
+				},
+				{
+					icon: '../../static/res/zhihu.png',
+					contactText: '',
+					contact: 'zhihu',
+					contactName: '知乎',
+					checked: false,
+					placeholder:'请输入知乎'
+				}
+			]
 		};
 	},
 	onLoad() {
@@ -420,7 +527,7 @@ export default {
 		worksInp(e) {
 			let i = e.target.dataset.index;
 			let val = e.detail.value;
-			let iden = e.detail.name;
+			let iden = e.target.dataset.name;
 			switch (iden) {
 				case 'selectedName':
 					_self.worksArr[i].selectedName = val;
@@ -441,11 +548,18 @@ export default {
 					_self.worksArr[i].worksBrowse = val;
 					break;
 			}
+			console.log(this.worksArr);
 		},
 		worksTextarea(e) {
 			let i = e.target.dataset.index;
 			let val = e.detail.value;
 			_self.worksArr[i].worksList = val;
+		},
+		contactCheckbox(e) {
+			// console.log(e, '==>checkbox');
+			let index = Number(e.currentTarget.dataset.index);
+				_self.contactArr[index].checked = !_self.contactArr[index].checked;
+				console.log(_self.contactArr[index].checked)
 		}
 	}
 };

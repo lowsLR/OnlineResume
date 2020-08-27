@@ -34,77 +34,66 @@ export default {
 					{
 						icon: '../../static/res/school.png',
 						contactText: '122xxxx',
-						contactColor: '',
 						contact: 'school',
 						contactName: '学校'
 					},
 					{
 						icon: '../../static/res/email.png',
 						contactText: '122xxxx',
-						contactColor: '',
 						contact: 'email',
 						contactName: '邮箱'
 					},
 					{
 						icon: '../../static/res/phone.png',
 						contactText: '122xxxx',
-						contactColor: '',
 						contact: 'phone',
 						contactName: '手机号码'
 					},
 					{
 						icon: '../../static/res/dizhi.png',
 						contactText: '122xxxx',
-						contactColor: '',
 						contact: 'dizhi',
 						contactName: '地址'
 					},
 					{
 						icon: '../../static/res/QQ.png',
 						contactText: '122xxxx',
-						contactColor: '',
 						contact: 'QQ',
 						contactName: 'qq'
 					},
 					{
 						icon: '../../static/res/wechat.png',
 						contactText: '122xxxx',
-						contactColor: '',
 						contact: 'wechat',
 						contactName: '微信'
 					},
 					{
 						icon: '../../static/res/bokeyyuan.png',
 						contactText: '122xxxx',
-						contactColor: '',
 						contact: 'bokeyyuan',
 						contactName: '博客园'
 					},
 					{
 						icon: '../../static/res/gitee-fill-round.png',
 						contactText: '122xxxx',
-						contactColor: '',
 						contact: 'gitee-fill-round',
 						contactName: '码云'
 					},
 					{
 						icon: '../../static/res/github.png',
 						contactText: '122xxxx',
-						contactColor: '',
 						contact: 'github',
 						contactName: 'github'
 					},
 					{
 						icon: '../../static/res/xinlang.png',
 						contactText: '122xxxx',
-						contactColor: '',
 						contact: 'xinlang',
 						contactName: '新浪'
 					},
 					{
 						icon: '../../static/res/zhihu.png',
 						contactText: '122xxxx',
-						contactColor: '',
 						contact: 'zhihu',
 						contactName: '知乎'
 					}
