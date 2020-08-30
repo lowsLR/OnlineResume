@@ -1,17 +1,5 @@
 <template>
 	<view class="establish-layout">
-		<!-- 1.是否自定义主题，背景颜色，渐变色，字体颜色，若选择默认下面的2，3点不显示 -->
-		<!-- 2.是否自定基本信息背景色 -->
-		<!-- 3.是否自定义线条颜色 -->
-		<!-- 4.上传头像 ***-->
-		<!-- 5.简介标题/内容填写 -->
-		<!-- 6.经验填写 -->
-		<!-- 7.项目填写 -->
-		<!-- 8.联系填写 -->
-		<!-- 9.尾部结束语填写-以及是否显示版权 -->
-
-		<!-- 需要解决的问题，1.from表单，2.图片上传，3.动态添加多个input框 -->
-		<!-- textarea 的需要用正则去除换行和字符操作 -->
 		<wired-card elevation="2" class="card-form">
 			<view class="resume-establish">
 				<form @submit="formSubmit" @reset="formReset">
@@ -31,9 +19,25 @@
 						<wired-toggle :checked="lineChecked" @change="lineFun(lineChecked)" class="lineColor"></wired-toggle>
 						<switch name="switchLine" :checked="lineChecked" v-show="false" />
 					</view>
+					<!-- 自定义设置 -->
+					<view class="custom" v-if="themeChecked">
+						<view class="custom-bg">
+							<wired-card elevation="1" class="card-custom"><input class="uni-input" @blur="custom" placeholder="主题背景色" data-id="bg" /></wired-card>
+						</view>
+						<view class="custom-info" v-if="infoChecked">
+							<view v-for="(item, index) in infoArr" :key="index">
+								<wired-card elevation="1" class="card-custom">
+									<input class="uni-input" @blur="custom" :placeholder="item.placeholder" :data-id="item.id" />
+								</wired-card>
+							</view>
+						</view>
+						<view class="custom-line" v-if="lineChecked">
+							<wired-card elevation="1" class="card-custom"><input class="uni-input" @blur="custom" placeholder="自定义线条色" data-id="line" /></wired-card>
+						</view>
+					</view>
 					<!-- 上传头像 -->
 					<view class="chooseImage-header">
-						<view @click="chooseImageH">上传图片</view>
+						<view @click="chooseImageH">上传头像</view>
 						<image :src="imgSrc" mode="" v-if="imgSrc"></image>
 					</view>
 					<!-- 性别 -->
@@ -69,6 +73,7 @@
 						</radio-group>
 					</view>
 					<view class="wired-radio-state">
+						<view class="title">状态</view>
 						<wired-radio-group>
 							<wired-radio name="good" class="customG" @click="genderRadio('good', 'state')">健康良好</wired-radio>
 							<wired-radio name="bad" class="customB" @click="genderRadio('bad', 'state')">宅{{ radioState }}</wired-radio>
@@ -77,56 +82,36 @@
 					<!-- 姓名之类基本信息 用正则表达式去除省和市，限制6个字左右-->
 					<view class="info-header">
 						<view class="title-inp">
-							<view class="inp-title">年龄：</view>
+							<view class="inp-title">年龄</view>
 							<wired-card elevation="1" class="card-info"><input class="uni-input" name="age" placeholder="年年18" v-model="age" /></wired-card>
 						</view>
 						<view class="title-inp">
-							<view class="inp-title">民族：</view>
+							<view class="inp-title">民族</view>
 							<wired-card elevation="1" class="card-info"><input class="uni-input" name="nation" placeholder="默认为汉族" v-model="nation" /></wired-card>
 						</view>
 						<view class="title-inp">
-							<view class="inp-title">户籍：</view>
+							<view class="inp-title">户籍</view>
 							<wired-card elevation="1" class="card-info"><input class="uni-input" name="place" placeholder="例:广东广州" v-model="place" /></wired-card>
 						</view>
 						<view class="title-inp">
-							<view class="inp-title">学历：</view>
+							<view class="inp-title">学历</view>
 							<wired-card elevation="1" class="card-info"><input class="uni-input" name="education" placeholder="活着自在最重要" v-model="education" /></wired-card>
 						</view>
 					</view>
 					<!-- 简介 -->
 					<view class="introduction">
-						<view class="int-title">简介内容：</view>
+						<view class="int-title">简介内容</view>
 						<view class="int-brief">
-							<wired-card elevation="1" class="card-int"><textarea auto-height placeholder="请用一句话描述简介标题" name="intTitle" /></wired-card>
+							<wired-card elevation="1" class="card-int"><textarea auto-height placeholder="请用一句话描述简介标题" name="intTitle" maxlength="-1" /></wired-card>
 						</view>
 						<view class="int-content">
-							<wired-card elevation="1" class="card-int"><textarea auto-height placeholder="用几句简单的话语介绍自己" name="intContent" /></wired-card>
-						</view>
-					</view>
-					<!-- 尾部 -->
-					<view class="footer">
-						<view class="footer-content">
-							<wired-card elevation="1" class="card-footer">
-								<textarea auto-height placeholder="结束语==>以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;" name="footerContent" />
-							</wired-card>
-							<view class="copyright">
-								<view class="copyright-title">著重权是否显示：</view>
-								<view class="switch-cop">
-									<wired-toggle :checked="copChecked" @change="copyrightFun(copChecked)" class="copColor"></wired-toggle>
-									<switch name="switchCop" :checked="copChecked" v-show="false" />
-								</view>
-								<view class="cop-contnet" v-if="copChecked">
-									<wired-card elevation="1" class="card-int">
-										<textarea auto-height placeholder="著重权==>以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;" name="footerContent" />
-									</wired-card>
-								</view>
-							</view>
+							<wired-card elevation="1" class="card-int"><textarea auto-height placeholder="用几句简单的话语介绍自己" name="intContent" maxlength="-1" /></wired-card>
 						</view>
 					</view>
 					<!-- 经历 -->
 					<view class="ex-layout">
 						<view class="ex-seleter">
-							<view id="ex-title">选择经验所要填写的数量</view>
+							<view id="ex-title">选择工作经验所要填写的数量</view>
 							<wired-combo class="ex-combo" @selected="exCombo" ref="exRef" selected="1">
 								<wired-item value="1">一份</wired-item>
 								<wired-item value="2">两份</wired-item>
@@ -142,19 +127,20 @@
 						<view class="ex-container">
 							<view class="ex-content" v-for="(item, index) in exArr" :key="index">
 								<view class="exSrc">
-									<view @click="chooseImageEx(index)">上传图片</view>
+									<view @click="chooseImageEx(index)">上传图片{{ index + 1 }}</view>
 									<image :src="item.exImg" mode="" v-if="item.exImg"></image>
 								</view>
 								<wired-card elevation="1" class="card-ex">
-									<input class="uni-input" @blur="exInp" placeholder="公司名" :data-index="index" :value="item.exName" />
+									<input class="uni-input" @blur="exInp" :placeholder="'公司名' + (index + 1)" :data-index="index" :value="item.exName" />
 								</wired-card>
 								<wired-card elevation="1" class="card-ex">
 									<textarea
 										auto-height
-										placeholder="经验==>以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;"
+										placeholder="工作经验==>以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;"
 										@blur="exTextarea"
 										:data-index="index"
 										:value="item.exContent"
+										maxlength="-1"
 									/>
 								</wired-card>
 							</view>
@@ -179,27 +165,41 @@
 						<view class="works-container">
 							<view class="works-content" v-for="(item, index) in worksArr" :key="index">
 								<view class="worksSrc">
-									<view @click="chooseImageWorks(index)">上传图片</view>
+									<view @click="chooseImageWorks(index)">上传图片{{ index + 1 }}</view>
 									<image :src="item.worksSrc" mode="" v-if="item.worksSrc"></image>
 								</view>
 								<wired-card elevation="1" class="card-works">
 									<input
 										class="uni-input"
 										@blur="worksInp"
-										placeholder="选项框对应的项目"
+										:placeholder="'选项框对应的项目名' + (index + 1)"
 										:data-index="index"
 										data-name="selectedName"
 										:value="item.selectedName"
 									/>
 								</wired-card>
 								<wired-card elevation="1" class="card-works">
-									<input class="uni-input" @blur="worksInp" placeholder="项目名" :data-index="index" data-name="worksTitle" :value="item.worksTitle" />
+									<input
+										class="uni-input"
+										@blur="worksInp"
+										:placeholder="'项目名' + (index + 1)"
+										:data-index="index"
+										data-name="worksTitle"
+										:value="item.worksTitle"
+									/>
 								</wired-card>
 								<wired-card elevation="1" class="card-works">
 									<input class="uni-input" @blur="worksInp" placeholder="日期" :data-index="index" data-name="worksDate" :value="item.worksDate" />
 								</wired-card>
 								<wired-card elevation="1" class="card-works">
-									<input class="uni-input" @blur="worksInp" placeholder="项目简介" :data-index="index" data-name="worksContent" :value="item.worksContent" />
+									<input
+										class="uni-input"
+										@blur="worksInp"
+										placeholder="用一句话简介项目功能"
+										:data-index="index"
+										data-name="worksContent"
+										:value="item.worksContent"
+									/>
 								</wired-card>
 								<wired-card elevation="1" class="card-works">
 									<input class="uni-input" @blur="worksInp" placeholder="源码地址" :data-index="index" data-name="worksLink" :value="item.worksLink" />
@@ -210,10 +210,11 @@
 								<wired-card elevation="1" class="card-ex">
 									<textarea
 										auto-height
-										placeholder="项目==>以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;"
+										placeholder="项目内容==>以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;"
 										@blur="worksTextarea"
 										:data-index="index"
 										:value="item.worksList"
+										maxlength="-1"
 									/>
 								</wired-card>
 							</view>
@@ -221,21 +222,45 @@
 					</view>
 					<!-- 联系方式 -->
 					<view class="contact-layout">
+						<view class="contact-title">联系方式</view>
 						<view class="contact-checkbox">
 							<view v-for="(item, index) in contactArr" :key="index">
-								<view class="contact-title">联系方式</view>
-								<wired-checkbox @change="contactCheckbox" :checked="item.checked" :data-index="index">
-									{{ item.contactName }}
-								</wired-checkbox>
+								<wired-checkbox @change="contactCheckbox" :checked="item.checked" :data-index="index">{{ item.contactName }}</wired-checkbox>
 							</view>
 						</view>
 						<view class="contact-list">
-							<view class="contact-text" v-for="(item,index) in contactArr" :key="index" v-if="item.checked">
+							<view class="contact-text" v-for="(item, index) in contactArr" :key="index" v-if="item.checked">
 								<image :src="item.icon" mode=""></image>
 								<wired-card elevation="1" class="card-contact"><input class="uni-input" :name="item.contact" :placeholder="item.placeholder" /></wired-card>
 							</view>
 						</view>
 						<!-- --wired-checkbox-icon-color Color of the checkbox. Default is currentColor. -->
+					</view>
+					<!-- 尾部 -->
+					<view class="footer">
+						<view>页尾</view>
+						<view class="footer-content">
+							<wired-card elevation="1" class="card-footer">
+								<textarea auto-height placeholder="结束语==>以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;" name="footerContent" maxlength="-1" />
+							</wired-card>
+							<view class="copyright">
+								<view class="copyright-title">著重权是否显示：</view>
+								<view class="switch-cop">
+									<wired-toggle :checked="copChecked" @change="copyrightFun(copChecked)" class="copColor"></wired-toggle>
+									<switch name="switchCop" :checked="copChecked" v-show="false" />
+								</view>
+								<view class="cop-contnet" v-if="copChecked">
+									<wired-card elevation="1" class="card-int">
+										<textarea
+											auto-height
+											placeholder="著重权==>以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;"
+											name="footerContent"
+											maxlength="-1"
+										/>
+									</wired-card>
+								</view>
+							</view>
+						</view>
 					</view>
 					<!-- 提交 -->
 					<view class="uni-btn-v">
@@ -254,9 +279,44 @@ export default {
 	name: 'establish',
 	data() {
 		return {
+			customBg: '', //自定义背景色
+			customLine: '', //自定义线条色
+			//自定义基本信息背景色
+			infoArr: [
+				{
+					id: 'sex',
+					placeholder: '性别背景色',
+					color: ''
+				},
+				{
+					id: 'age',
+					placeholder: '年龄背景色',
+					color: ''
+				},
+				{
+					id: 'healthy',
+					placeholder: '健康状态背景色',
+					color: ''
+				},
+				{
+					id: 'nation',
+					placeholder: '民族背景色',
+					color: ''
+				},
+				{
+					id: 'place',
+					placeholder: '籍贯背景色',
+					color: ''
+				},
+				{
+					id: 'education',
+					placeholder: '学历背景色',
+					color: ''
+				}
+			],
 			themeChecked: false, //是否自定义
 			infoChecked: false, //是否自定基本信息背景色
-			lineChecked: false, //是否自定基本信息背景色
+			lineChecked: false, //是否自定线条颜色
 			imgSrc: '', //头像
 			//性别
 			checkedM: false,
@@ -296,7 +356,7 @@ export default {
 					contact: 'school',
 					contactName: '学校',
 					checked: true,
-					placeholder:'请输入学校'
+					placeholder: '请输入学校'
 				},
 				{
 					icon: '../../static/res/email.png',
@@ -304,7 +364,7 @@ export default {
 					contact: 'email',
 					contactName: '邮箱',
 					checked: true,
-					placeholder:'请输入邮箱'
+					placeholder: '请输入邮箱'
 				},
 				{
 					icon: '../../static/res/phone.png',
@@ -312,7 +372,7 @@ export default {
 					contact: 'phone',
 					contactName: '手机号码',
 					checked: true,
-					placeholder:'请输入手机号码'
+					placeholder: '请输入手机号码'
 				},
 				{
 					icon: '../../static/res/dizhi.png',
@@ -320,7 +380,7 @@ export default {
 					contact: 'dizhi',
 					contactName: '地址',
 					checked: true,
-					placeholder:'请输入地址'
+					placeholder: '请输入地址'
 				},
 				{
 					icon: '../../static/res/QQ.png',
@@ -328,7 +388,7 @@ export default {
 					contact: 'QQ',
 					contactName: 'qq',
 					checked: false,
-					placeholder:'请输入qq'
+					placeholder: '请输入qq'
 				},
 				{
 					icon: '../../static/res/wechat.png',
@@ -336,7 +396,7 @@ export default {
 					contact: 'wechat',
 					contactName: '微信',
 					checked: false,
-					placeholder:'请输入微信'
+					placeholder: '请输入微信'
 				},
 				{
 					icon: '../../static/res/bokeyyuan.png',
@@ -344,7 +404,7 @@ export default {
 					contact: 'bokeyyuan',
 					contactName: '博客园',
 					checked: false,
-					placeholder:'请输入博客园'
+					placeholder: '请输入博客园'
 				},
 				{
 					icon: '../../static/res/gitee-fill-round.png',
@@ -352,7 +412,7 @@ export default {
 					contact: 'gitee-fill-round',
 					contactName: '码云',
 					checked: false,
-					placeholder:'请输入码云'
+					placeholder: '请输入码云'
 				},
 				{
 					icon: '../../static/res/github.png',
@@ -360,7 +420,7 @@ export default {
 					contact: 'github',
 					contactName: 'github',
 					checked: false,
-					placeholder:'请输入github'
+					placeholder: '请输入github'
 				},
 				{
 					icon: '../../static/res/xinlang.png',
@@ -368,7 +428,7 @@ export default {
 					contact: 'xinlang',
 					contactName: '新浪',
 					checked: false,
-					placeholder:'请输入新浪'
+					placeholder: '请输入新浪'
 				},
 				{
 					icon: '../../static/res/zhihu.png',
@@ -376,7 +436,7 @@ export default {
 					contact: 'zhihu',
 					contactName: '知乎',
 					checked: false,
-					placeholder:'请输入知乎'
+					placeholder: '请输入知乎'
 				}
 			]
 		};
@@ -558,8 +618,39 @@ export default {
 		contactCheckbox(e) {
 			// console.log(e, '==>checkbox');
 			let index = Number(e.currentTarget.dataset.index);
-				_self.contactArr[index].checked = !_self.contactArr[index].checked;
-				console.log(_self.contactArr[index].checked)
+			_self.contactArr[index].checked = !_self.contactArr[index].checked;
+			console.log(_self.contactArr[index].checked);
+		},
+		custom(e) {
+			console.log(e.target.dataset.id, '==>ee');
+			let id = e.target.dataset.id;
+			let val = e.detail.value;
+			switch (id) {
+				case 'bg':
+					_self.customBg = val;
+					break;
+				case 'line':
+					_self.customLine = val;
+					break;
+				case 'sex':
+					_self.infoArr[0].color = val;
+					break;
+				case 'age':
+					_self.infoArr[1].color = val;
+					break;
+				case 'healthy':
+					_self.infoArr[2].color = val;
+					break;
+				case 'nation':
+					_self.infoArr[3].color = val;
+					break;
+				case 'place':
+					_self.infoArr[4].color = val;
+					break;
+				case 'education':
+					_self.infoArr[5].color = val;
+					break;
+			}
 		}
 	}
 };
@@ -622,5 +713,109 @@ export default {
 .copColor {
 	--wired-toggle-off-color: #55aaff;
 	--wired-toggle-on-color: #f59;
+}
+.uni-switch {
+	display: flex;
+	flex-direction: column;
+}
+.chooseImage-header {
+	/* border: 1rpx solid red; */
+	margin: 10rpx 0;
+}
+.chooseImage-header image {
+	width: 200rpx;
+	height: 200rpx;
+	border-radius: 50%;
+	margin-top: 20rpx;
+}
+.wired-radio-state {
+	margin: 10rpx 0;
+}
+.customG {
+	margin-right: 20rpx;
+}
+.card-info {
+	padding-left: 10rpx;
+}
+.card-info .uni-input {
+	height: 60rpx;
+}
+.introduction .card-int {
+	/* border: 1px solid red; */
+	min-height: 200rpx;
+	padding-left: 12rpx;
+	padding-top: 10rpx;
+}
+.introduction .card-int textarea {
+	min-height: 200rpx;
+}
+
+.ex-seleter {
+	margin: 10rpx 0;
+	/* border: 1px solid red; */
+}
+.ex-container {
+	border: 1px solid #000;
+	margin: 20rpx 0;
+	padding: 20rpx 0;
+}
+.ex-content .exSrc view {
+	/* margin: 10rpx 0; */
+}
+.ex-content .exSrc image {
+	margin: 10rpx 20rpx;
+	width: 240rpx;
+	height: 200rpx;
+}
+.card-ex {
+	/* border: 1px solid red; */
+	padding-left: 15rpx;
+}
+.uni-input {
+	height: 60rpx;
+	padding: 10rpx;
+}
+textarea {
+	min-height: 300rpx;
+	padding: 10rpx;
+}
+.works-container {
+	border: 1px solid #000;
+	margin: 20rpx 0;
+	padding: 10rpx;
+}
+.works-content {
+	display: flex;
+	flex-direction: column;
+	/* border: 1px solid red; */
+}
+.worksSrc view {
+	margin: 10rpx 0;
+}
+.worksSrc image {
+	margin: 10rpx 20rpx;
+	width: 300rpx;
+	height: 300rpx;
+}
+
+.card-works input {
+	padding: 10rpx;
+}
+.contact-checkbox {
+	/* border: 1px solid red; */
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.contact-checkbox view {
+	width: 33%;
+}
+.contact-text {
+	/* border: 1px solid red; */
+}
+.contact-text image {
+	width: 60rpx;
+	height: 60rpx;
+	margin-right: 10rpx;
 }
 </style>
