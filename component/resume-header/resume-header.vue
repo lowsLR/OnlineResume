@@ -12,7 +12,7 @@
 					<view class="maringleft">{{ healthy }}</view>
 				</wired-fab>
 			</view>
-			<view class="brief-img"><image src="../../static/logo.png" mode=""></image></view>
+			<view class="brief-img"><image :src="headerImg" mode=""></image></view>
 			<view class="brief-r brief">
 				<wired-fab class="nation" :style="{ '--wired-fab-bg-color': nationColor }">
 					<view class="maringleft">{{ nation }}</view>
@@ -39,6 +39,12 @@
 export default {
 	name: 'resume-header',
 	props: {
+		headerImg: {
+			type: String,
+			default: () => {
+				return '../../static/logo.png';
+			}
+		},
 		sex: {
 			type: String,
 			default: () => {

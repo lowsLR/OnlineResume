@@ -3,7 +3,10 @@
 		{
 			"path": "pages/establish/establish",
 			"style": {
-				"navigationBarTitleText": "简历自定义"
+				"navigationBarTitleText": "简历自定义",
+				"navigationBarTextStyle":"white",
+				"navigationBarBackgroundColor":"#000000",
+				"transparentTitle":"auto"
 			}
 		},
 		{

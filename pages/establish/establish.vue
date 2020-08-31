@@ -22,7 +22,8 @@
 					<!-- 自定义设置 -->
 					<view class="custom" v-if="themeChecked">
 						<view class="custom-bg">
-							<wired-card elevation="1" class="card-custom"><input class="uni-input" @blur="custom" placeholder="主题背景色" data-id="bg" /></wired-card>
+							<wired-card elevation="1" class="card-custom"><input class="uni-input" @blur="custom" placeholder="主题深色线条-背景色" data-id="bg1" /></wired-card>
+							<wired-card elevation="1" class="card-custom"><input class="uni-input" @blur="custom" placeholder="主题浅色线条-背景色" data-id="bg2" /></wired-card>
 						</view>
 						<view class="custom-info" v-if="infoChecked">
 							<view v-for="(item, index) in infoArr" :key="index">
@@ -105,7 +106,7 @@
 							<wired-card elevation="1" class="card-int"><textarea auto-height placeholder="请用一句话描述简介标题" name="intTitle" maxlength="-1" /></wired-card>
 						</view>
 						<view class="int-content">
-							<wired-card elevation="1" class="card-int"><textarea auto-height placeholder="用几句简单的话语介绍自己" name="intContent" maxlength="-1" /></wired-card>
+							<wired-card elevation="1" class="card-int"><textarea auto-height placeholder="用几句简单的话语介绍自己,以中文分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;" name="intContent" maxlength="-1" /></wired-card>
 						</view>
 					</view>
 					<!-- 经历 -->
@@ -136,7 +137,7 @@
 								<wired-card elevation="1" class="card-ex">
 									<textarea
 										auto-height
-										placeholder="工作经验==>以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;"
+										placeholder="工作经验==>以中文分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;"
 										@blur="exTextarea"
 										:data-index="index"
 										:value="item.exContent"
@@ -210,7 +211,7 @@
 								<wired-card elevation="1" class="card-ex">
 									<textarea
 										auto-height
-										placeholder="项目内容==>以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;"
+										placeholder="项目内容==>以中文分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;"
 										@blur="worksTextarea"
 										:data-index="index"
 										:value="item.worksList"
@@ -241,7 +242,7 @@
 						<view>页尾</view>
 						<view class="footer-content">
 							<wired-card elevation="1" class="card-footer">
-								<textarea auto-height placeholder="结束语==>以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;" name="footerContent" maxlength="-1" />
+								<textarea auto-height placeholder="结束语==>以中文分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;" name="footerContent" maxlength="-1" />
 							</wired-card>
 							<view class="copyright">
 								<view class="copyright-title">著重权是否显示：</view>
@@ -253,7 +254,7 @@
 									<wired-card elevation="1" class="card-int">
 										<textarea
 											auto-height
-											placeholder="著重权==>以分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;"
+											placeholder="著重权==>以中文分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;"
 											name="footerContent"
 											maxlength="-1"
 										/>
@@ -270,6 +271,10 @@
 				</form>
 			</view>
 		</wired-card>
+		<view class="browse">
+			<view @click="browseRe(false)">例子简历浏览</view>
+			<view @click="browseRe(true)">生成简历浏览</view>
+		</view>
 	</view>
 </template>
 
@@ -279,7 +284,9 @@ export default {
 	name: 'establish',
 	data() {
 		return {
-			customBg: '', //自定义背景色
+			//自定义背景色
+			customBg1: '',
+			customBg2: '',
 			customLine: '', //自定义线条色
 			//自定义基本信息背景色
 			infoArr: [
@@ -447,6 +454,52 @@ export default {
 	methods: {
 		formSubmit: function(e) {
 			console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value));
+			let val = e.detail.value;
+			let sex = val.gender == 'men' ? '男' : '女';
+			let healthy = val.state == 'good' ? '健康良好' : `宅${sex}`;
+			let intContent = _self.trimSplit(val.intContent);
+			// console.log(intContent,"==>aaa")
+			let exampleCon = [];
+			intContent.forEach((item,index)=>{
+				if(index != 0 ){
+					exampleCon.push(item)
+				}
+			})
+			console.log(exampleCon,"==>exampleCon")
+			let estData = [
+				//背景
+				{
+					fill: _self.customBg1,
+					linearGradient: _self.customBg2
+				},
+				//简介
+				{
+					headerImg: _self.imgSrc,
+					sex: sex,
+					age: val.age,
+					healthy: healthy,
+					nation: val.nation,
+					place: val.place,
+					education: val.education,
+					sexColor: _self.infoArr[0].color,
+					ageColor: _self.infoArr[1].color,
+					healthyColor: _self.infoArr[2].color,
+					nationColor: _self.infoArr[3].color,
+					placeColor: _self.infoArr[4].color,
+					educationColor: _self.infoArr[5].color,
+					exampleInt: val.intTitle,
+					exampleTit: intContent[0],
+					exampleCon: exampleCon
+				},
+				// 经验
+				{
+					
+				},
+				//公用部分
+				{
+					lineColor: ''
+				}
+			];
 		},
 		formReset: function(e) {
 			console.log('清空数据');
@@ -626,8 +679,11 @@ export default {
 			let id = e.target.dataset.id;
 			let val = e.detail.value;
 			switch (id) {
-				case 'bg':
-					_self.customBg = val;
+				case 'bg1':
+					_self.customBg1 = val;
+					break;
+				case 'bg2':
+					_self.customBg2 = val;
 					break;
 				case 'line':
 					_self.customLine = val;
@@ -651,6 +707,34 @@ export default {
 					_self.infoArr[5].color = val;
 					break;
 			}
+		},
+		browseRe(isFlag) {
+			uni.navigateTo({
+				url: `../resume/resume?isFlag=${isFlag}`
+			});
+		},
+		//去掉首尾空格+字符窜切割
+		trimSplit(str) {
+			// console.log(str.split('；'), '==>.split');
+			let arr = [];
+			str.split('；').forEach(item => {
+				if (item) {
+					// console.log(item.replace(/(^\s*)|(\s*$)/g, ''), '==>item');
+						item = item.replace(/(^\s*)|(\s*$)/g, "");
+						item = item.replace(/\s+/g, "");//去除空格 
+						//去除换行 
+						item = item.replace(/<\/?.+?>/g,"");
+						item = item.replace(/[\r\n]/g, "");
+						item = item.replace(/^\s*/g,"");//去除左侧空格 
+						item = item.replace(/\s*$/g,"");//去右空格 
+						item = item.replace(/(^\s*)|(\s*$)/g, ""); //去掉字符串两端的空格 
+						item = item.replace(/\s/g,''); //去除字符串中间空格 
+						let reg=/^[0-9]*$/; //匹配整数 
+						reg.test(item); 
+						arr.push(item);
+				}
+			});
+			return arr;
 		}
 	}
 };
@@ -817,5 +901,16 @@ textarea {
 	width: 60rpx;
 	height: 60rpx;
 	margin-right: 10rpx;
+}
+.browse {
+	margin: 20rpx 0 0 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	/* flex-direction: column; */
+	font-size: 40rpx;
+	color: #ffffff;
+	background: #000000;
+	padding: 10rpx 0;
 }
 </style>
