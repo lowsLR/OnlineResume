@@ -106,7 +106,14 @@
 							<wired-card elevation="1" class="card-int"><textarea auto-height placeholder="请用一句话描述简介标题" name="intTitle" maxlength="-1" /></wired-card>
 						</view>
 						<view class="int-content">
-							<wired-card elevation="1" class="card-int"><textarea auto-height placeholder="用几句简单的话语介绍自己,以中文分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;" name="intContent" maxlength="-1" /></wired-card>
+							<wired-card elevation="1" class="card-int">
+								<textarea
+									auto-height
+									placeholder="用几句简单的话语介绍自己,以中文分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;"
+									name="intContent"
+									maxlength="-1"
+								/>
+							</wired-card>
 						</view>
 					</view>
 					<!-- 经历 -->
@@ -251,13 +258,8 @@
 									<switch name="switchCop" :checked="copChecked" v-show="false" />
 								</view>
 								<view class="cop-contnet" v-if="copChecked">
-									<wired-card elevation="1" class="card-int">
-										<textarea
-											auto-height
-											placeholder="著重权==>以中文分号(;)为断句,例:人生短暂,及时行乐;与其忧愁,不如苦中作乐;"
-											name="footerContent"
-											maxlength="-1"
-										/>
+									<wired-card elevation="1" class="cop">
+										<input class="uni-input" name="footerCopy" placeholder="例子:Copyright ©xxx All rights reserved" />
 									</wired-card>
 								</view>
 							</view>
@@ -453,29 +455,54 @@ export default {
 	},
 	methods: {
 		formSubmit: function(e) {
-			console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value));
+			// console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value));
 			let val = e.detail.value;
 			let sex = val.gender == 'men' ? '男' : '女';
 			let healthy = val.state == 'good' ? '健康良好' : `宅${sex}`;
 			let intContent = _self.trimSplit(val.intContent);
 			// console.log(intContent,"==>aaa")
 			let exampleCon = [];
-			intContent.forEach((item,index)=>{
-				if(index != 0 ){
-					exampleCon.push(item)
+			intContent.forEach((item, index) => {
+				if (index != 0) {
+					exampleCon.push(item);
 				}
-			})
+			});
 			// console.log(exampleCon,"==>exampleCon");
 			let exArr = [];
-			_self.exArr.forEach(item=>{
+			_self.exArr.forEach(item => {
 				let obj = {
-					exName:item.exName,
-					exSrc:item.exImg?item.exImg:'https://www.gstatic.com/webp/gallery/1.sm.jpg',
+					exName: item.exName,
+					exSrc: item.exImg ? item.exImg : 'https://www.gstatic.com/webp/gallery/1.sm.jpg',
 					exContent: _self.trimSplit(item.exContent)
+				};
+				exArr.push(obj);
+			});
+			// console.log(exArr,"==>exArr");
+			let worksArr = [];
+			_self.worksArr.forEach(item => {
+				let obj = {
+					selectedName: item.selectedName,
+					worksTitle: item.worksTitle,
+					worksSrc: item.worksSrc ? item.worksSrc : 'https://www.gstatic.com/webp/gallery/1.sm.jpg',
+					worksDate: item.worksDate,
+					worksContent: item.worksContent,
+					worksList: _self.trimSplit(item.worksList),
+					worksLink: item.worksLink,
+					worksBrowse: item.worksBrowse
+				};
+				worksArr.push(obj);
+			});
+			// console.log(worksArr,"==>worksArr");
+			let contactArr = [];
+			_self.contactArr.forEach(item => {
+				if (item.checked && val[`${item.contact}`].length) {
+					item.contactText = val[`${item.contact}`];
+					contactArr.push(item);
 				}
-				exArr.push(obj)
-			})
-			console.log(exArr,"==>exArr");
+			});
+			// console.log(contactArr,"==>contactArr");
+			// console.log(val['school'],"==>contactArr");
+			let footerArr = _self.trimSplit(val.footerContent);
 			let estData = [
 				//背景
 				{
@@ -499,23 +526,33 @@ export default {
 					educationColor: _self.infoArr[5].color,
 					exampleInt: val.intTitle,
 					exampleTit: intContent[0],
-					exampleCon: exampleCon,
-					
+					exampleCon: exampleCon
 				},
 				// 经验
 				{
 					//还有很多没完善
-					experienceArr:exArr
+					experienceArr: exArr
 				},
 				// 项目
 				{
-					
+					worksArr: worksArr
+				},
+				// 联系
+				{
+					contactArr: contactArr
+				},
+				// 尾部
+				{
+					footerArr: footerArr,
+					footerIsFlag: val.switchCop,
+					footerCopy: val.footerCopy
 				},
 				//公用部分
 				{
-					lineColor: ''
+					lineColor: _self.customLine
 				}
 			];
+			console.log(estData, '==>estData');
 		},
 		formReset: function(e) {
 			console.log('清空数据');
@@ -736,18 +773,18 @@ export default {
 			str.split('；').forEach(item => {
 				if (item) {
 					// console.log(item.replace(/(^\s*)|(\s*$)/g, ''), '==>item');
-						item = item.replace(/(^\s*)|(\s*$)/g, "");
-						item = item.replace(/\s+/g, "");//去除空格 
-						//去除换行 
-						item = item.replace(/<\/?.+?>/g,"");
-						item = item.replace(/[\r\n]/g, "");
-						item = item.replace(/^\s*/g,"");//去除左侧空格 
-						item = item.replace(/\s*$/g,"");//去右空格 
-						item = item.replace(/(^\s*)|(\s*$)/g, ""); //去掉字符串两端的空格 
-						item = item.replace(/\s/g,''); //去除字符串中间空格 
-						let reg=/^[0-9]*$/; //匹配整数 
-						reg.test(item); 
-						arr.push(item);
+					item = item.replace(/(^\s*)|(\s*$)/g, '');
+					item = item.replace(/\s+/g, ''); //去除空格
+					//去除换行
+					item = item.replace(/<\/?.+?>/g, '');
+					item = item.replace(/[\r\n]/g, '');
+					item = item.replace(/^\s*/g, ''); //去除左侧空格
+					item = item.replace(/\s*$/g, ''); //去右空格
+					item = item.replace(/(^\s*)|(\s*$)/g, ''); //去掉字符串两端的空格
+					item = item.replace(/\s/g, ''); //去除字符串中间空格
+					let reg = /^[0-9]*$/; //匹配整数
+					reg.test(item);
+					arr.push(item);
 				}
 			});
 			return arr;
@@ -928,5 +965,8 @@ textarea {
 	color: #ffffff;
 	background: #000000;
 	padding: 10rpx 0;
+}
+.cop-contnet .cop {
+	width: 100%;
 }
 </style>

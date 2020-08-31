@@ -3,7 +3,7 @@
 		<view class="footer-list" v-for="(item, index) in footerArr" :key="index">
 			<text>{{ item }}</text>
 		</view>
-		<view class="footer-flag" v-if="footerIsFlag">Copyright ©LR All rights reserved</view>
+		<view class="footer-flag" v-if="footerIsFlag">{{footerCopy}}</view>
 	</view>
 </template>
 
@@ -21,6 +21,12 @@ export default {
 			type: Boolean,
 			default: () => {
 				return true;
+			}
+		},
+		footerCopy: {
+			type: String,
+			default: () => {
+				return 'Copyright ©LR All rights reserved';
 			}
 		}
 	}
