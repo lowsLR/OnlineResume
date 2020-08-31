@@ -15,7 +15,7 @@
 							></wired-image>
 						</view>
 						<view class="swiper-content">
-							<view v-for="(items, indexs) in item.exsContent" :key="indexs" class="exText">{{ indexs + 1 }}. {{ items.text }}</view>
+							<view v-for="(items, indexs) in item.exsContent" :key="indexs" class="exText" v-if="items.text">{{ indexs + 1 }}. {{ items.text }}</view>
 						</view>
 					</view>
 				</view>

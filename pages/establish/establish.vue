@@ -465,7 +465,17 @@ export default {
 					exampleCon.push(item)
 				}
 			})
-			console.log(exampleCon,"==>exampleCon")
+			// console.log(exampleCon,"==>exampleCon");
+			let exArr = [];
+			_self.exArr.forEach(item=>{
+				let obj = {
+					exName:item.exName,
+					exSrc:item.exImg?item.exImg:'https://www.gstatic.com/webp/gallery/1.sm.jpg',
+					exContent: _self.trimSplit(item.exContent)
+				}
+				exArr.push(obj)
+			})
+			console.log(exArr,"==>exArr");
 			let estData = [
 				//背景
 				{
@@ -489,9 +499,15 @@ export default {
 					educationColor: _self.infoArr[5].color,
 					exampleInt: val.intTitle,
 					exampleTit: intContent[0],
-					exampleCon: exampleCon
+					exampleCon: exampleCon,
+					
 				},
 				// 经验
+				{
+					//还有很多没完善
+					experienceArr:exArr
+				},
+				// 项目
 				{
 					
 				},

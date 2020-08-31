@@ -1,7 +1,7 @@
 <template>
 	<view class="resume-layout">
 		<!-- 背景 -->
-		<wired-card elevation="4" :fill="fill" class="resume-bg" :style="{ 'background-image': linearGradient }">
+		<wired-card elevation="4" :fill="fill" class="resume-bg" :style="{ 'background': linearGradient }">
 			<!-- 简介 -->
 			<resume-header></resume-header>
 			<!-- 经验 -->
@@ -34,7 +34,7 @@ export default {
 	data() {
 		return {
 			fill: '#333',
-			linearGradient: 'linear-gradient(to top left, #b1b1b1, #f2f2f2)'
+			linearGradient: '#fff'
 		};
 	},
 	onLoad(option) {
