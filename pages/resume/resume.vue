@@ -1,7 +1,7 @@
 <template>
 	<view class="resume-layout">
 		<!-- 背景 -->
-		<wired-card elevation="4" :fill="fill" class="resume-bg" :style="{ 'background': linearGradient }">
+		<wired-card elevation="4" :fill="fill" class="resume-bg" :style="{ background: linearGradient }">
 			<!-- 简介 -->
 			<resume-header></resume-header>
 			<!-- 经验 -->
@@ -39,6 +39,14 @@ export default {
 	},
 	onLoad(option) {
 		console.log(option.isFlag, '==>option');
+		uni.$on('update', data => {
+			console.log('监听成功', JSON.parse(data.msg));
+		});
+	},
+	onUnload() {
+		// uni.$off('update', () => {
+		// 	console.log('卸载监听');
+		// });
 	}
 };
 </script>

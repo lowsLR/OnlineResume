@@ -447,7 +447,8 @@ export default {
 					checked: false,
 					placeholder: '请输入知乎'
 				}
-			]
+			],
+			estData: []
 		};
 	},
 	onLoad() {
@@ -553,6 +554,7 @@ export default {
 				}
 			];
 			console.log(estData, '==>estData');
+			_self.estData = estData;
 		},
 		formReset: function(e) {
 			console.log('清空数据');
@@ -762,6 +764,7 @@ export default {
 			}
 		},
 		browseRe(isFlag) {
+			uni.$emit('update', { msg: JSON.stringify(_self.estData) });
 			uni.navigateTo({
 				url: `../resume/resume?isFlag=${isFlag}`
 			});
