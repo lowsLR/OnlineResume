@@ -22,6 +22,7 @@ import resumeExperience from '../../component/resume-experience/resume-experienc
 import resumeWorks from '../../component/resume-works/resume-works.vue';
 import resumeContact from '../../component/resume-contact/resume-contact.vue';
 import resumeFooter from '../../component/resume-footer/resume-footer.vue';
+let _self;
 export default {
 	name: 'resume',
 	components: {
@@ -34,19 +35,37 @@ export default {
 	data() {
 		return {
 			fill: '#333',
-			linearGradient: '#fff'
+			linearGradient: '#fff',
+			isFlag: false,
+			resumeArr: []
 		};
 	},
 	onLoad(option) {
-		console.log(option.isFlag, '==>option');
-		uni.$on('update', data => {
-			console.log('监听成功', JSON.parse(data.msg));
+		_self = this;
+		// console.log(option.isFlag, '==>option');
+		_self.isFlag = option.isFlag;
+		uni.getStorage({
+			key: 'storage_key',
+			success: function(res) {
+				console.log(res.data, '==>remuse');
+				_self.resumeArr = res.data;
+			}
 		});
+		_self.init();
+	},
+	methods: {
+		init() {}
 	},
 	onUnload() {
-		// uni.$off('update', () => {
-		// 	console.log('卸载监听');
-		// });
+		console.log('结束');
+		if (!_self.isFlag) {
+			uni.removeStorage({
+				key: 'storage_key',
+				success: function(res) {
+					// console.log('success');
+				}
+			});
+		}
 	}
 };
 </script>

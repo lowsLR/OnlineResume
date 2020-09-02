@@ -273,6 +273,7 @@
 				</form>
 			</view>
 		</wired-card>
+		<view style="padding: 20rpx;"> 后语：还有很多地方待完善。提前声明一点，想要生成一份自己的在线简历还需要上传服务器，自己写一个接口post上去 或者 在浏览器的后台里将数据打印出来，在resume页面把数据写死。</view>
 		<view class="browse">
 			<view @click="browseRe(false)">例子简历浏览</view>
 			<view @click="browseRe(true)">生成简历浏览</view>
@@ -553,7 +554,7 @@ export default {
 					lineColor: _self.customLine
 				}
 			];
-			console.log(estData, '==>estData');
+			// console.log(estData, '==>estData');
 			_self.estData = estData;
 		},
 		formReset: function(e) {
@@ -764,7 +765,14 @@ export default {
 			}
 		},
 		browseRe(isFlag) {
-			uni.$emit('update', { msg: JSON.stringify(_self.estData) });
+			// uni.$emit('update',JSON.stringify(_self.estData));
+			uni.setStorage({
+			    key: 'storage_key',
+			    data: JSON.stringify(_self.estData),
+			    success: function () {
+			        // console.log('success');
+			    }
+			});
 			uni.navigateTo({
 				url: `../resume/resume?isFlag=${isFlag}`
 			});
@@ -791,8 +799,17 @@ export default {
 				}
 			});
 			return arr;
+		},
+		onUnload(){
+			// console.log('结束');
+			// uni.removeStorage({
+			//     key: 'storage_key',
+			//     success: function (res) {
+			//         console.log('success');
+			//     }
+			// });
 		}
-	}
+	},
 };
 </script>
 
