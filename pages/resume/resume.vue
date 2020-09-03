@@ -1,7 +1,7 @@
 <template>
 	<view class="resume-layout">
 		<!-- 背景 -->
-		<wired-card elevation="4" :fill="fill" class="resume-bg" :style="{ background: linearGradient }">
+		<wired-card elevation="4" :fill="fill" class="resume-bg" :style="{ background: linearGradient, color: customBgColor }">
 			<!-- 简介 -->
 			<resume-header></resume-header>
 			<!-- 经验 -->
@@ -36,25 +36,40 @@ export default {
 		return {
 			fill: '#333',
 			linearGradient: '#fff',
+			customBgColor: '#fff',
 			isFlag: false,
-			resumeArr: []
+			resumeArr: [] //这里将假数据传进去
 		};
 	},
 	onLoad(option) {
 		_self = this;
-		// console.log(option.isFlag, '==>option');
-		_self.isFlag = option.isFlag;
-		uni.getStorage({
-			key: 'storage_key',
-			success: function(res) {
-				console.log(res.data, '==>remuse');
-				_self.resumeArr = res.data;
-			}
-		});
-		_self.init();
+		console.log(option, '==>option');
+		_self.init(option);
 	},
+	// onShow() {
+	// 	if(!_self.resumeArr.length){
+	// 		_self.init();
+	// 	}
+	// },
 	methods: {
-		init() {}
+		init(option) {
+			_self.isFlag = option.isFlag;
+			uni.getStorage({
+				key: 'storage_key',
+				success: function(res) {
+					console.log(res.data, '==>remuse');
+					if (res.data.length && option.isFlag !== 'undefined') {
+						_self.resumeArr = res.data;
+					}
+				}
+			});
+			console.log(_self.resumeArr, '==>_self.resumeArr'); 
+			if (_self.resumeArr.length) {
+				_self.fill = _self.resumeArr[0].fill ? _self.resumeArr[0].fill : '#333';
+				_self.linearGradient = _self.resumeArr[0].linearGradient ? _self.resumeArr[0].linearGradient : '#fff';
+				_self.customBgColor = _self.resumeArr[0].customBgColor ? _self.resumeArr[0].customBgColor : '#fff';
+			}
+		}
 	},
 	onUnload() {
 		console.log('结束');
@@ -76,7 +91,7 @@ export default {
 	padding: 0;
 }
 .resume-bg {
-	color: #fff;
+	/* color: #fff; */
 	width: 100%;
 	min-height: 1800rpx;
 	/* background: #fff; */

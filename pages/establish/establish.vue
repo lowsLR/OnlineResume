@@ -24,6 +24,7 @@
 						<view class="custom-bg">
 							<wired-card elevation="1" class="card-custom"><input class="uni-input" @blur="custom" placeholder="主题深色线条-背景色" data-id="bg1" /></wired-card>
 							<wired-card elevation="1" class="card-custom"><input class="uni-input" @blur="custom" placeholder="主题浅色线条-背景色" data-id="bg2" /></wired-card>
+							<wired-card elevation="1" class="card-custom"><input class="uni-input" @blur="custom" placeholder="主题字体颜色" data-id="bgColor" /></wired-card>
 						</view>
 						<view class="custom-info" v-if="infoChecked">
 							<view v-for="(item, index) in infoArr" :key="index">
@@ -290,6 +291,7 @@ export default {
 			//自定义背景色
 			customBg1: '',
 			customBg2: '',
+			customBgColor:'',
 			customLine: '', //自定义线条色
 			//自定义基本信息背景色
 			infoArr: [
@@ -509,7 +511,8 @@ export default {
 				//背景
 				{
 					fill: _self.customBg1,
-					linearGradient: _self.customBg2
+					linearGradient: _self.customBg2,
+					customBgColor:_self.customBgColor
 				},
 				//简介
 				{
@@ -740,6 +743,9 @@ export default {
 					break;
 				case 'bg2':
 					_self.customBg2 = val;
+					break;
+					case 'bgColor':
+					_self.customBgColor = val;
 					break;
 				case 'line':
 					_self.customLine = val;

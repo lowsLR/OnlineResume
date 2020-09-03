@@ -15,7 +15,7 @@
 		</view>
 
 		<view class="toUse">
-			<view><wired-link elevation="5" href="https://wiredjs.com/showcase.html" target="_blank">组件库展示</wired-link></view>
+			<view><wired-link elevation="3" href="https://wiredjs.com/showcase.html" target="_blank">组件库展示</wired-link></view>
 			<view>
 				<wired-listbox horizontal selected="one" class="customListBox" @selected="establish"><wired-item value="one">主题简历</wired-item></wired-listbox>
 			</view>
