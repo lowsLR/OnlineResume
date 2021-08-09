@@ -8,6 +8,9 @@ Vue.config.productionTip = false
 
 App.mpType = 'app'
 
+// 全局挂载简历数据
+import RD from './pages/resume/resumeData.js';
+Vue.prototype.RD = RD;
 const app = new Vue({
     ...App
 })

@@ -1,2 +1,3 @@
 # OnlineResume
-uni组件在线简历---未完成
+##1.主要文件是resume; 
+##2.简历数据在/pages/resume/resumeData.js修改;

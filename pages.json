@@ -1,26 +1,25 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
+	"pages": [{
 			"path": "pages/resume/resume",
 			"style": {
 				"transparentTitle": "always"
 			}
-		},
-		{
-			"path": "pages/establish/establish",
-			"style": {
-				"navigationBarTitleText": "简历自定义",
-				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#000000",
-				"transparentTitle": "auto"
-			}
-		},
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "使用Wired Elements制作简历"
-			}
 		}
+		// {
+		// 	"path": "pages/establish/establish",// 这个废弃，暂时写死
+		// 	"style": {
+		// 		"navigationBarTitleText": "简历自定义",
+		// 		"navigationBarTextStyle": "white",
+		// 		"navigationBarBackgroundColor": "#000000",
+		// 		"transparentTitle": "auto"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/index/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "使用Wired Elements制作简历"
+		// 	}
+		// }
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
