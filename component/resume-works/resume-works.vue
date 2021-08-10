@@ -1,19 +1,24 @@
 <template>
 	<view class="resume-works">
-		<wired-tabs selected="项目1" class="works-selected" :style="{ '--wired-item-selected-bg': selectedBg, '--wired-item-selected-color': selectedColor }">
+		<wired-tabs selected="项目1" class="works-selected"
+			:style="{ '--wired-item-selected-bg': selectedBg, '--wired-item-selected-color': selectedColor,color:selectedColor }">
 			<wired-tab v-for="(item, index) in worksArr" :key="index" :name="item.selectedName">
+				<view class="title">{{item.title}}</view>
 				<view class="title-date">
 					<view class="date">{{ item.worksDate }}</view>
 					<view class="title">{{ item.worksTitle }}</view>
 				</view>
 				<view class="content">
 					<view class="works-image" v-if="item.worksSrc">
-						<wired-image :elevation="3" :src="item.worksSrc" :style="{ color: worImageColor, width: worWidth, height: worHeight }"></wired-image>
+						<wired-image :elevation="3" :src="item.worksSrc"
+							:style="{ color: worImageColor, width: '300rpx', height: '300rpx' }"></wired-image>
 					</view>
 					<view class="content-list">
-						<view class="conten">{{ item.worksContent }}</view>
+						<view class="conten">简述：{{ item.worksContent }}</view>
 						<view class="list">
-							<view v-for="(items, indexs) in item.worksList" :key="indexs">{{ indexs + 1 }}.{{ items }}</view>
+							所责任务：
+							<view v-for="(items, indexs) in item.worksList" :key="indexs">{{items.text}}
+							</view>
 						</view>
 					</view>
 				</view>
@@ -37,130 +42,83 @@
 </template>
 
 <script>
-export default {
-	name: 'resume-works',
-	props: {
-		selectedBg: {
-			type: String,
-			default: () => {
-				return '';
+	export default {
+		name: 'resume-works',
+		data() {
+			return {
+				selectedBg: this.RD[0][this.theme].selectedBg, //项目切换键的颜色
+				selectedColor: this.RD[0][this.theme].selectedColor, //项目切字体颜色
+				worImageColor: this.RD[0][this.theme].worImageColor, //项目扫码图片线框颜色
+				worksArr: this.RD[3].worksArr, //项目数据
 			}
 		},
-		selectedColor: {
-			type: String,
-			default: () => {
-				return '';
+		methods: {
+			navto(url) {
+				// console.log(url);
+				window.location.href = url;
 			}
 		},
-		worImageColor: {
-			type: String,
-			default: () => {
-				return '';
-			}
-		},
-		worWidth: {
-			type: String,
-			default: () => {
-				return '300rpx';
-			}
-		},
-		worHeight: {
-			type: String,
-			default: () => {
-				return '300rpx';
-			}
-		},
-		worksArr: {
-			type: Array,
-			default: () => {
-				return [
-					{
-						selectedName: '项目1',
-						worksTitle: 'uniapp',
-						worksSrc: '../../static/uni-weChat-img.jpg',
-						worksDate: '2020.07.10-2020.08.17',
-						worksContent: 'uniapp是一个原创的xxx分享社区网友分享的xxx、图片大全,都是网友最珍贵的开心经历,xxxxx!',
-						worksList: ['使用了uniapp混合开发', '使用了element UI插件', '使用了xxxx'],
-						worksLink: 'https://uniapp.dcloud.io/',
-						worksBrowse: 'https://uniapp.dcloud.io/'
-					},
-					{
-						selectedName: '项目2',
-						worksTitle: '小程序uni',
-						worksSrc: '',
-						worksDate: '2019.07.10-2019.08.17',
-						worksContent: '小程序uni是一个原创的xxx分享社区网友分享的xxx、图片大全,都是网友最珍贵的开心经历,xxxxx!',
-						worksList: ['使用了微信小程序开发', '使用了element UI插件', '使用了xxxx'],
-						worksLink: 'https://uniapp.dcloud.io/',
-						worksBrowse: ''
-					},
-					{
-						selectedName: '项目3',
-						worksTitle: 'uniH5',
-						worksSrc: '../../static/uni-weChat-img.jpg',
-						worksDate: '2020.07.10-2020.08.17',
-						worksContent: 'uniapp是一个原创的xxx分享社区网友分享的xxx、图片大全,都是网友最珍贵的开心经历,xxxxx!',
-						worksList: ['使用了uniapp混合开发', '使用了element UI插件', '使用了xxxx'],
-						worksLink: 'https://uniapp.dcloud.io/',
-						worksBrowse: 'https://uniapp.dcloud.io/'
-					}
-				];
-			}
-		}
-	},
-	methods: {
-		navto(url) {
-			// console.log(url);
-			window.location.href = url;
-		}
-	}
-};
+	};
 </script>
 
 <style scoped>
-.works-selected {
-	min-height: 600rpx;
-	/* border: 1px solid red; */
-	padding: 0 10rpx;
-}
-.works-selected:focus {
-	border: none;
-}
-.title-date {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	font-size: 36rpx;
-	font-weight: bold;
-	margin-bottom: 20rpx;
-}
-.works-image {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.content-list {
-	margin-top: 20rpx;
-	font-size: 32rpx;
-}
-.content-list .conten {
-	margin: 10rpx 0;
-}
-.list {
-	display: flex;
-	flex-direction: column;
-}
-.list > view {
-	margin: 10rpx 0;
-}
-.works-link,
-.works-browse {
-	margin: 10rpx 0;
-	font-size: 32rpx;
-}
-.works-link text,
-.works-browse text {
-	text-decoration: underline;
-}
+	.works-selected {
+		min-height: 600rpx;
+		/* border: 1px solid red; */
+		padding: 0 10rpx;
+	}
+
+	.works-selected .title {
+		font-weight: 600;
+		margin: 10rpx 0;
+	}
+
+	.works-selected:focus {
+		border: none;
+	}
+
+	.title-date {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 36rpx;
+		font-weight: bold;
+		margin-bottom: 20rpx;
+	}
+
+	.works-image {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.content-list {
+		margin-top: 20rpx;
+		font-size: 32rpx;
+	}
+
+	.content-list .conten {
+		margin: 10rpx 0;
+	}
+
+	.list {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.list>view {
+		margin: 10rpx 0;
+	}
+
+	.works-link,
+	.works-browse {
+		margin: 10rpx 0;
+		font-size: 32rpx;
+	}
+
+	.works-link text,
+	.works-browse text {
+		text-decoration: underline;
+	}
 </style>

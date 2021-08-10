@@ -3,17 +3,21 @@
 		<view class="contact-content">
 			<view class="contact-title">联系方式</view>
 			<view class="contact-list-icon">
-				<wired-icon-button class="list-icon" v-for="(item, index) in contactArr" :key="index" @click="showContact(item)" :style="{ color: contactColor }">
-					<image :src="item.icon" :style="{ 'background-color': contactBgColor }"></image>
+				<wired-icon-button class="list-icon" v-for="(item, index) in contactArr" :key="index"
+					@click="showContact(item)" :style="{ color: contactColor }" v-if="item.contactText">
+					<image :src="item.icon" class="imgIcon"></image>
 				</wired-icon-button>
 			</view>
 		</view>
 		<view class="contact-show-content" v-if="contactList.length">
-			<view v-for="(items, indexs) in contactList" :key="indexs" :class="[indexs == contactList.length - 1 ? 'scale' : '','contact-list']">
+			<view v-for="(items, indexs) in contactList" :key="indexs"
+				:class="[indexs == contactList.length - 1 ? 'scale' : '','contact-list']">
 				<view>
 					{{ items.contactName }}:
 				</view>
-				<view>
+				<view
+					:class="[items.contact == 'gitee' || items.contact == 'github' || items.contact=='bokeyyuan' || items.contact == 'xinlang' || items.contact == 'zhihu' ? 'link':'']"
+					@click="hyperlink(items)">
 					{{ items.contactText }}
 				</view>
 			</view>
@@ -23,175 +27,108 @@
 </template>
 
 <script>
-let _self;
-export default {
-	name: '',
-	props: {
-		contactArr: {
-			type: Array,
-			default: () => {
-				return [
-					{
-						icon: '../../static/res/school.png',
-						contactText: '122xxxx',
-						contact: 'school',
-						contactName: '学校'
-					},
-					{
-						icon: '../../static/res/email.png',
-						contactText: '122xxxx',
-						contact: 'email',
-						contactName: '邮箱'
-					},
-					{
-						icon: '../../static/res/phone.png',
-						contactText: '122xxxx',
-						contact: 'phone',
-						contactName: '手机号码'
-					},
-					{
-						icon: '../../static/res/dizhi.png',
-						contactText: '122xxxx',
-						contact: 'dizhi',
-						contactName: '地址'
-					},
-					{
-						icon: '../../static/res/QQ.png',
-						contactText: '122xxxx',
-						contact: 'QQ',
-						contactName: 'qq'
-					},
-					{
-						icon: '../../static/res/wechat.png',
-						contactText: '122xxxx',
-						contact: 'wechat',
-						contactName: '微信'
-					},
-					{
-						icon: '../../static/res/bokeyyuan.png',
-						contactText: '122xxxx',
-						contact: 'bokeyyuan',
-						contactName: '博客园'
-					},
-					{
-						icon: '../../static/res/gitee-fill-round.png',
-						contactText: '122xxxx',
-						contact: 'gitee-fill-round',
-						contactName: '码云'
-					},
-					{
-						icon: '../../static/res/github.png',
-						contactText: '122xxxx',
-						contact: 'github',
-						contactName: 'github'
-					},
-					{
-						icon: '../../static/res/xinlang.png',
-						contactText: '122xxxx',
-						contact: 'xinlang',
-						contactName: '新浪'
-					},
-					{
-						icon: '../../static/res/zhihu.png',
-						contactText: '122xxxx',
-						contact: 'zhihu',
-						contactName: '知乎'
-					}
-				];
-			}
+	export default {
+		name: '',
+		data() {
+			return {
+				contactList: [], // 显示联系信息
+				contactColor: this.RD[0][this.theme].linearGradient, //图标外圈颜色
+				contactArr: this.RD[4].contactArr, //联系信息
+			};
 		},
-		contactColor: {
-			type: String,
-			default: () => {
-				return '#ffffff';
-			}
-		},
-		contactBgColor: {
-			type: String,
-			default: () => {
-				return '#ffffff';
+		created() {},
+		methods: {
+			showContact(con) {
+				let obj = {};
+				this.contactList.push(con);
+				this.contactList = this.contactList.reduce((item, next) => {
+					obj[next.contact] ? '' : (obj[next.contact] = true && item.push(next));
+					return item;
+				}, []);
+				// console.log(this.contactList);
+			},
+			hyperlink(item) {
+				if (item.contact == 'gitee' || item.contact == 'github' || item.contact == 'bokeyyuan' || item.contact ==
+					'xinlang' || item.contact == 'zhihu') {
+					window.location.href = item.contactText;
+				}
 			}
 		}
-	},
-	data() {
-		return {
-			contactList: []
-		};
-	},
-	created() {
-		_self = this;
-	},
-	methods: {
-		showContact(con) {
-			let obj = {};
-			_self.contactList.push(con);
-			_self.contactList = _self.contactList.reduce((item, next) => {
-				obj[next.contact] ? '' : (obj[next.contact] = true && item.push(next));
-				return item;
-			}, []);
-			console.log(_self.contactList);
-		}
-	}
-};
+	};
 </script>
 
 <style scoped>
-.resume-contact {
-	padding: 20rpx;
-}
-.contact-content {
-}
-.contact-title {
-	font-size: 40rpx;
-	font-weight: bold;
-	margin: 10rpx 0 20rpx 0;
-	width: 100%;
-	/* border: 1px solid red; */
-	text-align: center;
-}
-.contact-list-icon {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	/* border: 1px solid red; */
-}
-.list-icon {
-	color: #ffffff;
-	/* background-color: red; */
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 20%;
-	margin: 10rpx 0;
-}
-.list-icon image {
-	width: 60rpx;
-	height: 60rpx;
-	background-color: #ffffff;
-	border-radius: 50%;
-}
-.contact-show-content {
-	padding: 10rpx 20rpx;
-}
-.contact-list {
-	font-size: 36rpx;
-	display: flex;
-	align-items: center;
-}
-.contact-list view {
-	margin: 10rpx 0;
-}
-.contact-list view:first-child {
-	font-weight: bold;
-	width: 180rpx;
-	text-align: left;
-}
-.contact-list view:last-child {
-	font-weight: 400;
-	flex: 1;
-	text-align: left;
-}
-.scale{
-	font-size: 40rpx;
-}
+	.resume-contact {
+		padding: 20rpx;
+	}
+
+	.contact-content {}
+
+	.contact-title {
+		font-size: 40rpx;
+		font-weight: bold;
+		margin: 10rpx 0 20rpx 0;
+		width: 100%;
+		/* border: 1px solid red; */
+		text-align: center;
+	}
+
+	.contact-list-icon {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		/* border: 1px solid red; */
+	}
+
+	.list-icon {
+		color: #ffffff;
+		/* background-color: red; */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 20%;
+		margin: 10rpx 0;
+	}
+
+	.list-icon image {
+		width: 60rpx;
+		height: 60rpx;
+		background-color: #ffffff;
+		border-radius: 50%;
+	}
+
+	.contact-show-content {
+		padding: 10rpx 20rpx;
+	}
+
+	.contact-list {
+		font-size: 36rpx;
+		display: flex;
+		align-items: center;
+	}
+
+	.link {
+		text-decoration: underline;
+		color: #55aaff;
+	}
+
+	.contact-list view {
+		margin: 10rpx 0;
+	}
+
+	.contact-list view:first-child {
+		font-weight: bold;
+		width: 180rpx;
+		text-align: left;
+	}
+
+	.contact-list view:last-child {
+		font-weight: 400;
+		flex: 1;
+		text-align: left;
+	}
+
+	.scale {
+		font-size: 40rpx;
+	}
 </style>

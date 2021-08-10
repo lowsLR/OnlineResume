@@ -55,7 +55,7 @@
 				exampleInt: this.RD[1].exampleInt, //标题
 				exampleTit: this.RD[1].exampleTit, //职位
 				exampleCon: this.RD[1].exampleCon, //自我简述
-				lineColor: this.RD[0].lineColor, //文字之间段落线条
+				lineColor: this.RD[0][this.theme].lineColor, //文字之间段落线条
 			}
 		},
 	};

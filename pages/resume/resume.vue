@@ -35,9 +35,9 @@
 		data() {
 			return {
 				// 默认主题色
-				fill: this.RD[0].list1.fill,//背景色
-				linearGradient: this.RD[0].list1.linearGradient,//线条色
-				customBgColor: this.RD[0].list1.customBgColor,//字体色
+				fill: this.RD[0][this.theme].fill, //背景色
+				linearGradient: this.RD[0][this.theme].linearGradient, //线条色
+				customBgColor: this.RD[0][this.theme].customBgColor, //字体色
 			};
 		},
 		onLoad() {
