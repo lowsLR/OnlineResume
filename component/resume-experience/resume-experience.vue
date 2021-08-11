@@ -33,15 +33,13 @@
 <script>
 	export default {
 		name: 'resume-experience',
+		props:['indictor','lineColor','exImageColor'],
 		data() {
 			return {
 				indicatorDots: false, //轮播图小圆点
 				swiperHeight: '500rpx', //轮播图默认高度
 				changeIndex: 0, //轮播图默认下标
-				array: this.RD[2].array,
-				indictor: this.RD[0][this.theme].indictor, //轮播图小圆点颜色
-				lineColor: this.RD[0][this.theme].lineColor, //分割线
-				exImageColor: this.RD[0][this.theme].exImageColor, //公司logo的border颜色，		
+				array: this.RD[2].array,		
 			};
 		},
 		created() {

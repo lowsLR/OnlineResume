@@ -28,11 +28,11 @@
 
 <script>
 	export default {
-		name: '',
+		name: 'resume-contact',
+		props:['contactColor'],
 		data() {
 			return {
 				contactList: [], // 显示联系信息
-				contactColor: this.RD[0][this.theme].linearGradient, //图标外圈颜色
 				contactArr: this.RD[4].contactArr, //联系信息
 			};
 		},

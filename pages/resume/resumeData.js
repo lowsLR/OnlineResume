@@ -1,4 +1,4 @@
-const theme = 'list1'; ////显示默认主题
+const theme = 'list4'; ////显示默认主题
 // 主题背景，默认有三套主题，也可以自己添加
 const wiredCardBg = {
 	list1: { // 默认主题色为黑色背景，白色线条，白色字体
@@ -11,9 +11,47 @@ const wiredCardBg = {
 		selectedBg: '#222222', //项目切换键的颜色
 		selectedColor: '#FFFFFF', //项目切字体颜色
 		worImageColor: '#B1B1B1', //项目扫码图片线框颜色
+		marriageBG: 'rgba(255, 255, 255, 0.2)', //气泡颜色
+		mboxShadow: '1px 1px 0 0px #f2f2f2', //气泡阴影
 	},
 	list2: { // 晚点再添加多几个主题色搭配
-
+		fill: '#FFFFFF',
+		linearGradient: '#333333',
+		customBgColor: '#333333',
+		lineColor: '#B1B1B1',
+		exImageColor: '#B1B1B1',
+		indictor: '#333333',
+		selectedBg: '#B1B1B1',
+		selectedColor: '#333333',
+		worImageColor: '#B1B1B1',
+		marriageBG: 'rgba(0, 0, 0, 0.1)',
+		mboxShadow: '1px 1px 0 0px #000000',
+	},
+	list3: {
+		fill: '#084F6B',
+		linearGradient: '#E6E6E1',
+		customBgColor: '#E6E6E1',
+		lineColor: '#B2D9D8',
+		exImageColor: '#B2D9D8',
+		indictor: '#084F6B',
+		selectedBg: '#222222',
+		selectedColor: '#E6E6E1',
+		worImageColor: '#B1B1B1',
+		marriageBG: 'rgba(255, 255, 255, 0.1)',
+		mboxShadow: '1px 1px 0 0px #f2f2f2',
+	},
+	list4: {
+		fill: '#6AA17A',
+		linearGradient: '#DBE8B2',
+		customBgColor: '#FFFFFF',
+		lineColor: '#2A5269',
+		exImageColor: '#B2D9D8',
+		indictor: '#2A5269',
+		selectedBg: '#2A5269',
+		selectedColor: '#FFFFFF',
+		worImageColor: '#B2D9D8',
+		marriageBG: 'rgba(255, 255, 255, 0.2)',
+		mboxShadow: '1px 1px 0 0px #E3DBD7',
 	}
 };
 // 简介

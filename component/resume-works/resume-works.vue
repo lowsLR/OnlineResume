@@ -44,12 +44,10 @@
 <script>
 	export default {
 		name: 'resume-works',
+		props:['selectedBg','worImageColor','selectedColor'],
 		data() {
 			return {
-				selectedBg: this.RD[0][this.theme].selectedBg, //项目切换键的颜色
 				worksArr: this.RD[3].worksArr, //项目数据
-				worImageColor: this.RD[0][this.theme].worImageColor, //项目扫码图片线框颜色
-				selectedColor: this.RD[0][this.theme].selectedColor, //项目切字体颜色
 			}
 		},
 		methods: {

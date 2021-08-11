@@ -4,13 +4,15 @@
 		<view class="brief-introduction">
 			<view class="brief-l brief">
 				<view class="briefContent">
-					<view :class="[sex == '男' ? 'male' : 'female','maringleft']">{{ sex }}</view>
+					<view :class="[sex == '男' ? 'male' : 'female','maringleft']"
+						:style="{background:marriageBG,boxShadow:mboxShadow}">{{ sex }}</view>
 				</view>
 				<view class="briefContent">
-					<view class="maringleft marriage">{{marriage}}</view>
+					<view class="maringleft marriage" :style="{background:marriageBG,boxShadow:mboxShadow}">{{marriage}}
+					</view>
 				</view>
 				<view class="briefContent">
-					<view class="maringleft age">{{ age }}</view>
+					<view class="maringleft age" :style="{background:marriageBG,boxShadow:mboxShadow}">{{ age }}</view>
 				</view>
 			</view>
 			<view class="brief-img">
@@ -18,13 +20,17 @@
 			</view>
 			<view class="brief-r brief">
 				<view class="briefContent">
-					<view class="maringleft place">{{ place }}</view>
+					<view class="maringleft place" :style="{background:marriageBG,boxShadow:mboxShadow}">{{ place }}
+					</view>
 				</view>
 				<view class="briefContent">
-					<view class="maringleft statu">{{statu}}</view>
+					<view class="maringleft statu" :style="{background:marriageBG,boxShadow:mboxShadow}">{{statu}}
+					</view>
 				</view>
 				<view class="briefContent">
-					<view class="maringleft education">{{ education }}</view>
+					<view class="maringleft education" :style="{background:marriageBG,boxShadow:mboxShadow}">
+						{{ education }}
+					</view>
 				</view>
 			</view>
 		</view>
@@ -43,6 +49,7 @@
 <script>
 	export default {
 		name: 'resume-header',
+		props: ['lineColor', 'marriageBG', 'mboxShadow'],
 		data() {
 			return {
 				headerImg: this.RD[1].headerImg, //头像路径
@@ -55,7 +62,6 @@
 				exampleInt: this.RD[1].exampleInt, //标题
 				exampleTit: this.RD[1].exampleTit, //职位
 				exampleCon: this.RD[1].exampleCon, //自我简述
-				lineColor: this.RD[0][this.theme].lineColor, //文字之间段落线条
 			}
 		},
 	};
@@ -124,8 +130,8 @@
 		height: 90rpx;
 		text-align: center;
 		line-height: 90rpx;
-		background: rgba(255, 255, 255, 0.2);
-		box-shadow: 1px 1px 0 0px #f2f2f2;
+		/* background: rgba(255, 255, 255, 0.2);
+		box-shadow: 1px 1px 0 0px #f2f2f2; */
 		font-size: 32rpx;
 	}
 

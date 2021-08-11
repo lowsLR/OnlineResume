@@ -26,6 +26,7 @@ import {
 Vue.prototype.RD = ResumeData;
 Vue.prototype.theme = theme;
 const app = new Vue({
-	...App
+	...App,
+	// data: {theme} 全局挂载可修改
 })
 app.$mount()
