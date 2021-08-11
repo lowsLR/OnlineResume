@@ -37,7 +37,7 @@
 	--wired-item-selected-color 有线项目所选颜色所选选项卡的文本颜色.
 	selected - 当前选定选项卡的名称
 	name - 该选项卡的唯一标识符
-	label - 要在选项卡中显示的文本。默认为name属性
+	label - 要在选项卡中显示的文本。默认为 name 属性
 	-->
 </template>
 
