@@ -16,7 +16,7 @@
 					<view class="content-list">
 						<view class="conten">简述：{{ item.worksContent }}</view>
 						<view class="list">
-							所责任务：
+							<view v-if="!item.selectedName=='其他'">所责任务：</view>
 							<view v-for="(items, indexs) in item.worksList" :key="indexs">{{items.text}}
 							</view>
 						</view>
@@ -47,9 +47,9 @@
 		data() {
 			return {
 				selectedBg: this.RD[0][this.theme].selectedBg, //项目切换键的颜色
-				selectedColor: this.RD[0][this.theme].selectedColor, //项目切字体颜色
-				worImageColor: this.RD[0][this.theme].worImageColor, //项目扫码图片线框颜色
 				worksArr: this.RD[3].worksArr, //项目数据
+				worImageColor: this.RD[0][this.theme].worImageColor, //项目扫码图片线框颜色
+				selectedColor: this.RD[0][this.theme].selectedColor, //项目切字体颜色
 			}
 		},
 		methods: {

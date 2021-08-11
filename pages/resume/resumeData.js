@@ -68,13 +68,13 @@ const experience = {
 };
 // 作品/项目
 const works = {
-	worksArr: [ //项目数据,最多列五个，我没做滚动处理，有兴趣的可以修改
+	worksArr: [ //项目数据,最多列五个，我没做滚动处理，有兴趣的可以修改,若项目过多可以添加"selectedName:'其他'",列出来;
 		{
 			selectedName: '项目1', //选中项目下标，修改数字就行了
 			title: '道源世界/永劫之灵',
 			worksTitle: 'cocos creator', //开发工具
 			worksSrc: '', //项目二维码图片
-			worksDate: '2020.10-2021.07', //项目时间
+			worksDate: '2020.10-2021.7', //项目时间
 			worksContent: '仙侠类游戏，大陆内外已上线，海外只有ios版《道源世界》，国内《永劫之灵》', //项目简述
 			worksList: [ //所负责的模块
 				{
@@ -86,6 +86,69 @@ const works = {
 				{
 					text: '3.负责封装一些公用工具/方法，如时间格式，简繁体转换，数值处理，装备回收或复用等；'
 				}
+			],
+			worksLink: '', //gitHub/gitee链接
+			worksBrowse: '' //在线浏览
+		},
+		{
+			selectedName: '项目2',
+			title: '零点八视频点播-pc端',
+			worksTitle: 'vue + Element UI',
+			worksSrc: '',
+			worksDate: '2020.8-2020.10',
+			worksContent: 'pc端视频点播类网站，视频主要类型是体育竞技，也有多频道的电视频道点播，其中也有相关体育竞技的新闻。（由于项目是外包的不是本公司产品，下面的链接是公司的服务器，数据也很久没更新了，若感兴趣可以点击查看）',
+			worksList: [{
+					text: '1.负责根据ui制作一部分页面，如登陆注册，新闻，电视频道，比赛录像等页面；'
+				},
+				{
+					text: '2.负责封装一些公用的方法，如比赛时间倒数，搜索筛选功能，路由拦截等；'
+				},
+				{
+					text: '3.负责vue打包后调整和优化项目性能；'
+				}
+			],
+			worksLink: '',
+			worksBrowse: 'http://8.129.19.0:8891/index.html#/main/1'
+		},
+		{
+			selectedName: '项目3',
+			title: '零点八视频点播-app/h5端',
+			worksTitle: 'uniapp',
+			worksSrc: '',
+			worksDate: '2020.5-2020.8',
+			worksContent: 'app/h5端和pc端数据虽然是一样的，但用的开发框架不一样，虽然uni可以一套代码生成多套，但代码量也会额外增加不少，特别是视频播放问题，因此pc端才会用vue。（也是外包项目，下面链接有安装包，若感兴趣的可以下载查看）',
+			worksList: [{
+					text: '1.负责根据ui制作一部分页面，如新闻，电视频道，比赛比分等页面；'
+				},
+				{
+					text: '2.负责调式一些兼容性或者样式问题；'
+				}
+			],
+			worksLink: '',
+			worksBrowse: ''
+		},
+		{
+			selectedName: '其他',
+			title: '2019-2020期间其他项目',
+			worksTitle: '',
+			worksSrc: '',
+			worksDate: '',
+			worksContent: '小程序的可以在微信那查看',
+			worksList: [{
+					text: '2020.3-2020.4 个人小程序-手画板；'
+				},
+				{
+					text: '2019.8-2019.11 小程序-超房网；'
+				},
+				{
+					text: '2019.4-2019.8 小程序-酒大叔；'
+				},
+				{
+					text: '2019.1-2019.4 vue开发网站挂载在公司的微信公众号上 ；'
+				},
+				{
+					text: '2018.11-2018.12 广州文慧官网；'
+				},
 			],
 			worksLink: '',
 			worksBrowse: ''
