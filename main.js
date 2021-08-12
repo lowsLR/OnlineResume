@@ -27,6 +27,6 @@ Vue.prototype.RD = ResumeData;
 Vue.prototype.theme = theme;
 const app = new Vue({
 	...App,
-	// data: {theme} 全局挂载可修改
+	// data: {theme} 全局挂载可修改，使用this.$root调用
 })
 app.$mount()

@@ -56,7 +56,7 @@
 					const query = uni.createSelectorQuery().in(this);
 					query.selectAll('.swiper-content').boundingClientRect(data => {
 						// console.log("得到布局位置信息" + JSON.stringify(data));
-						this.swiperHeight = data[this.changeIndex].height + 60 + 'px';
+						this.swiperHeight = data[this.changeIndex].height + 120 + 'px';
 						// console.log(this.swiperHeight, "==>this.swiperHeight")
 					}).exec();
 				}, 20)

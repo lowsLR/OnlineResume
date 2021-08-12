@@ -14,7 +14,7 @@ const wiredCardBg = {
 		marriageBG: 'rgba(255, 255, 255, 0.2)', //气泡颜色
 		mboxShadow: '1px 1px 0 0px #f2f2f2', //气泡阴影
 	},
-	list2: { // 晚点再添加多几个主题色搭配
+	list2: { //白黑主题
 		fill: '#FFFFFF',
 		linearGradient: '#333333',
 		customBgColor: '#333333',
@@ -27,7 +27,7 @@ const wiredCardBg = {
 		marriageBG: 'rgba(0, 0, 0, 0.1)',
 		mboxShadow: '1px 1px 0 0px #000000',
 	},
-	list3: {
+	list3: { //蓝白主题
 		fill: '#084F6B',
 		linearGradient: '#E6E6E1',
 		customBgColor: '#E6E6E1',
@@ -40,7 +40,7 @@ const wiredCardBg = {
 		marriageBG: 'rgba(255, 255, 255, 0.1)',
 		mboxShadow: '1px 1px 0 0px #f2f2f2',
 	},
-	list4: {
+	list4: { //绿白主题
 		fill: '#6AA17A',
 		linearGradient: '#DBE8B2',
 		customBgColor: '#FFFFFF',
@@ -65,7 +65,7 @@ const briefIntroduction = {
 	education: '大专', //学历
 	exampleInt: '纵然前端虐我千百遍，我依然待ta如初恋', //标题
 	exampleTit: '我叫刘荣,是一名前端工程师。', //职位
-	exampleCon: '两年多的前端开发经验，vue开发过pc端，uni开发过app端，小程序开发，bootstrap制作公司官网以及目前使用cocos creator 开发2d仙侠类游戏，该款游戏已在大陆内、外上线。', //自我简述
+	exampleCon: '两年多的前端开发经验，vue开发过视频播放pc端，uni开发过视频播放app/h5端，小程序点餐外卖开发，bootstrap制作公司官网以及目前使用cocos creator 开发2d仙侠类游戏，该款游戏海内外已上线。', //自我简述
 };
 // 经验
 const experience = {
@@ -113,7 +113,7 @@ const works = {
 			worksTitle: 'cocos creator', //开发工具
 			worksSrc: '', //项目二维码图片
 			worksDate: '2020.10-2021.7', //项目时间
-			worksContent: '仙侠类游戏，大陆内外已上线，海外只有ios版《道源世界》，国内《永劫之灵》', //项目简述
+			worksContent: '仙侠类游戏2d游戏，海内外已上线', //项目简述
 			worksList: [ //所负责的模块
 				{
 					text: '1.负责游戏里一些动态动画，如人/怪/npc/技能等龙骨动画和粒子效果；'
@@ -164,6 +164,23 @@ const works = {
 			],
 			worksLink: '',
 			worksBrowse: ''
+		},
+		{
+			selectedName: '项目4',
+			title: '修真大掌门天墟纪',
+			worksTitle: 'uniapp',
+			worksSrc: '',
+			worksDate: '2020.5-2020.6',
+			worksContent: '仙侠类文字游戏，海内外已上线',
+			worksList: [{
+					text: '1.负责根据ui制作一部分页面,如背包，小说，升级等页面；'
+				},
+				{
+					text: '2.负责调式一些兼容性或者样式问题；'
+				}
+			],
+			worksLink: '',
+			worksBrowse: 'https://www.soyohui.com/game/98499/'
 		},
 		{
 			selectedName: '其他',
