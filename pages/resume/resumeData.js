@@ -58,38 +58,35 @@ const wiredCardBg = {
 const briefIntroduction = {
 	headerImg: '../../static/logo.png', //头像路径
 	sex: '男', //性别
-	age: 26, //年龄
+	age: 25, //年龄
 	marriage: '未婚', //是否结婚
 	place: '广州', //现住址
 	statu: '离职', //是否已离职
-	education: '大专', //学历
+	education: '本科', //学历
 	exampleInt: '纵然前端虐我千百遍，我依然待ta如初恋', //标题
-	exampleTit: '我叫刘荣,是一名前端工程师。', //职位
-	exampleCon: '两年多的前端开发经验，vue开发过视频播放pc端，uni开发过视频播放app/h5端，小程序点餐外卖开发，bootstrap制作公司官网以及目前使用cocos creator 开发2d仙侠类游戏，该款游戏海内外已上线。', //自我简述
+	exampleTit: '我叫%姓名%,是一名前端工程师。', //职位
+	exampleCon: '两年多的前端开发经验，vue开发过pc端，uni开发过app/h5端，小程序开发，bootstrap制作公司官网以及目前使用cocos creator 开发2d仙侠类游戏，该款游戏海内外已上线。', //自我简述
 };
 // 经验
 const experience = {
 	array: [{
-			exName: '广州猫爪信息科技有限公司', //公司名
-			exSrc: '../../static/maoZhua.png', // 公司logo路径
+			exName: '广州xxxx信息科技有限公司', //公司名
+			exSrc: 'https://www-file.huawei.com/-/media/corporate/images/home/logo/huawei_logo.png', // 公司logo路径
 			exTime: '2020-5至2021-8', // 工作年限
 			exsContent: [{ // 填写工作内容
 					text: '1.vue开发pc端网页视频点播；'
 				},
 				{
-					text: '2.uniapp开发视频点播类app端和仙侠类文字游戏app端；'
+					text: '2.uniapp开发xxxx；'
 				},
 				{
-					text: '3.DragonBones Pro 制作人/怪/头像/技能等龙骨动画；'
-				},
-				{
-					text: '4.cocos creator 开发仙侠类2d游戏，已上线；'
+					text: '3.cocos creator 开发仙侠类2d游戏，已上线；'
 				},
 			]
 		},
 		{
-			exName: '广州文慧信息科技有限公司',
-			exSrc: 'http://www.wenhuitec.com/static/upload/image/20200309/1583712202292132.png',
+			exName: '广州xxxxx信息科技有限公司',
+			exSrc: 'https://www-file.huawei.com/-/media/corporate/images/home/logo/huawei_logo.png',
 			exTime: '2018-11至2019-11',
 			exsContent: [{
 					text: '1.根据UI设计还原页面；'
@@ -109,7 +106,7 @@ const works = {
 	worksArr: [ //项目数据,最多列五个，我没做滚动处理，有兴趣的可以修改,若项目过多可以添加"selectedName:'其他'",列出来;
 		{
 			selectedName: '项目1', //选中项目下标，修改数字就行了
-			title: '道源世界/永劫之灵',
+			title: '项目1名xxx',
 			worksTitle: 'cocos creator', //开发工具
 			worksSrc: '', //项目二维码图片
 			worksDate: '2020.10-2021.7', //项目时间
@@ -130,7 +127,7 @@ const works = {
 		},
 		{
 			selectedName: '项目2',
-			title: '零点八视频点播-pc端',
+			title: '项目2名xxx',
 			worksTitle: 'vue + Element UI',
 			worksSrc: '',
 			worksDate: '2020.8-2020.10',
@@ -146,11 +143,11 @@ const works = {
 				}
 			],
 			worksLink: '',
-			worksBrowse: 'http://8.129.19.0:8891/index.html#/main/1'
+			worksBrowse: ''
 		},
 		{
 			selectedName: '项目3',
-			title: '零点八视频点播-app/h5端',
+			title: '项目3名xxx',
 			worksTitle: 'uniapp',
 			worksSrc: '',
 			worksDate: '2020.5-2020.8',
@@ -166,23 +163,6 @@ const works = {
 			worksBrowse: ''
 		},
 		{
-			selectedName: '项目4',
-			title: '修真大掌门天墟纪',
-			worksTitle: 'uniapp',
-			worksSrc: '',
-			worksDate: '2020.5-2020.6',
-			worksContent: '仙侠类文字游戏，海内外已上线',
-			worksList: [{
-					text: '1.负责根据ui制作一部分页面,如背包，小说，升级等页面；'
-				},
-				{
-					text: '2.负责调式一些兼容性或者样式问题；'
-				}
-			],
-			worksLink: '',
-			worksBrowse: 'https://www.soyohui.com/game/98499/'
-		},
-		{
 			selectedName: '其他',
 			title: '2019-2020期间其他项目',
 			worksTitle: '',
@@ -190,19 +170,19 @@ const works = {
 			worksDate: '',
 			worksContent: '小程序的可以在微信那查看',
 			worksList: [{
-					text: '2020.3-2020.4 个人小程序-手画板；'
+					text: '2020.3-2020.4 个人小程序-xxx；'
 				},
 				{
-					text: '2019.8-2019.11 小程序-超房网；'
+					text: '2019.8-2019.11 小程序-xxx；'
 				},
 				{
-					text: '2019.4-2019.8 小程序-酒大叔；'
+					text: '2019.4-2019.8 小程序-xxxx；'
 				},
 				{
 					text: '2019.1-2019.4 vue开发网站挂载在公司的微信公众号上 ；'
 				},
 				{
-					text: '2018.11-2018.12 广州文慧官网；'
+					text: '2018.11-2018.12 广州xxxx官网；'
 				},
 			],
 			worksLink: '',
@@ -216,67 +196,67 @@ const contact = {
 			icon: '../../static/res/school.png',
 			contact: 'school',
 			contactName: '学校',
-			contactText: '广东工商职业技术学院', // 修改这里就行了，若为空则不显示
+			contactText: '广东xxxx大学', // 修改这里就行了，若为空则不显示
 		},
 		{
 			icon: '../../static/res/phone.png',
 			contact: 'phone',
 			contactName: '联系',
-			contactText: '13790711751',
+			contactText: '134xxxxxxxx',
 		},
 		{
 			icon: '../../static/res/email.png',
 			contact: 'email',
 			contactName: '邮箱',
-			contactText: '1228747929@qq.com',
+			contactText: '122xxxxx@qq.com',
 		},
 		{
 			icon: '../../static/res/dizhi.png',
 			contact: 'dizhi',
 			contactName: '地址',
-			contactText: '广州市番禺区大石站',
+			contactText: '广州市xxxxx站',
 		},
 		{
 			icon: '../../static/res/QQ.png',
 			contact: 'QQ',
 			contactName: 'qq',
-			contactText: '',
+			contactText: 'ssssss',
 		},
 		{
 			icon: '../../static/res/wechat.png',
 			contact: 'wechat',
 			contactName: '微信',
-			contactText: '',
+			contactText: 'ssssss',
 		},
 		{
 			icon: '../../static/res/bokeyyuan.png',
 			contact: 'bokeyyuan',
 			contactName: '博客',
-			contactText: '',
+			contactText: 'cccccc',
 		},
 		{
 			icon: '../../static/res/gitee-fill-round.png',
 			contact: 'gitee',
 			contactName: '码云',
-			contactText: 'https://gitee.com/liu_rong',
+			contactText: 'https://gitee.com/xxxxxx',
 		},
 		{
 			icon: '../../static/res/github.png',
 			contact: 'github',
 			contactName: 'github',
-			contactText: 'https://github.com/lowsLR',
+			contactText: 'ccccc',
 		},
 		{
 			icon: '../../static/res/xinlang.png',
 			contact: 'xinlang',
 			contactName: '新浪',
-			contactText: '',
+			contactText: 'xxxxxx',
 		},
 		{
 			icon: '../../static/res/zhihu.png',
 			contact: 'zhihu',
 			contactName: '知乎',
-			contactText: '',
+			contactText: 'zzzzzz',
 		}
 	]
 };
@@ -296,7 +276,7 @@ const footer = {
 			text: '敢于去迈步，用代码敲出一条梦想的道路'
 		},
 	],
-	footerCopy: 'Copyright ©LR All rights reserved'
+	footerCopy: 'Copyright ©%名字% All rights reserved'//注释权，若为空不显示
 };
 const ResumeData = [
 	wiredCardBg,

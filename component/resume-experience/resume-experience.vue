@@ -33,13 +33,13 @@
 <script>
 	export default {
 		name: 'resume-experience',
-		props:['indictor','lineColor','exImageColor'],
+		props: ['indictor', 'lineColor', 'exImageColor'],
 		data() {
 			return {
 				indicatorDots: false, //轮播图小圆点
 				swiperHeight: '500rpx', //轮播图默认高度
 				changeIndex: 0, //轮播图默认下标
-				array: this.RD[2].array,		
+				array: this.RD[2].array,
 			};
 		},
 		created() {
@@ -112,7 +112,6 @@
 		display: flex;
 		margin-right: 20rpx;
 	}
-
 	.corporate {
 		display: flex;
 		justify-content: center;
